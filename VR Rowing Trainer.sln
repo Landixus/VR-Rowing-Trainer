@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VR Rowing Trainer", "VR Rowing Trainer.csproj", "{76AA29D5-236C-D6AF-987F-D2E1CF430A8D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VR Rowing Trainer.Editor", "VR Rowing Trainer.Editor.csproj", "{519A0AB4-2A4C-6D2E-5F11-25151160778B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{76AA29D5-236C-D6AF-987F-D2E1CF430A8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76AA29D5-236C-D6AF-987F-D2E1CF430A8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76AA29D5-236C-D6AF-987F-D2E1CF430A8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76AA29D5-236C-D6AF-987F-D2E1CF430A8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{519A0AB4-2A4C-6D2E-5F11-25151160778B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{519A0AB4-2A4C-6D2E-5F11-25151160778B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{519A0AB4-2A4C-6D2E-5F11-25151160778B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{519A0AB4-2A4C-6D2E-5F11-25151160778B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
