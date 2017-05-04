@@ -54,7 +54,9 @@ public class Rowing_Speed : MonoBehaviour {
             targetSpeed = 0;
             speedChange = (targetSpeed - speed) * speedChangePeriod;
         }
-        return;
+		Debug.Log("Speed:" + speed);
+
+		return;
     }
 
     public static void refreshAntChannel() {
