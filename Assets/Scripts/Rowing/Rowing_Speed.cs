@@ -54,7 +54,7 @@ public class Rowing_Speed : MonoBehaviour {
             targetSpeed = 0;
             speedChange = (targetSpeed - speed) * speedChangePeriod;
         }
-		Debug.Log("Speed:" + speed);
+		//Debug.Log("Speed:" + speed);
 
 		return;
     }
