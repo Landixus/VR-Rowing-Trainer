@@ -22,6 +22,8 @@ public class Rowing_Speed : MonoBehaviour {
     private static int prevRev = 0;
     private static float timeSinceLastUpdate;
     static AntChannel channel; // ANT Channel being used
+    public static double distance; //total distance travelled
+    public static double distanceDelta; //distance travelled since last update
 
     [Range(1.0f, 4.0f)]
     public static double circumference = 2.0f;
@@ -33,6 +35,7 @@ public class Rowing_Speed : MonoBehaviour {
         targetSpeed = 0;
         speedChange = 0;
         timeSinceLastUpdate = Time.time;
+        distance = 0;
     }
 	
 	// Update is called once per frame
@@ -54,8 +57,8 @@ public class Rowing_Speed : MonoBehaviour {
             targetSpeed = 0;
             speedChange = (targetSpeed - speed) * speedChangePeriod;
         }
-		//Debug.Log("Speed:" + speed);
-
+        //Debug.Log("Speed:" + speed);
+        distance = distance + getDistance();
 		return;
     }
 
@@ -132,5 +135,12 @@ public class Rowing_Speed : MonoBehaviour {
         prevRev = revolution;
         prevTime = time;
         return;
+    }
+
+    public double getDistance()
+    {
+        distanceDelta = speed * timeSinceLastUpdate;
+        //move player boat 
+        return distanceDelta;
     }
 }
