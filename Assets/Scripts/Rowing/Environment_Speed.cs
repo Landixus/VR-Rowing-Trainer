@@ -16,7 +16,7 @@ public class Environment_Speed : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        normalise_multiplier = 1 / video_speed * convert;
+        normalise_multiplier = 1 / (video_speed * convert);
         Debug.Log("normaliser:" + normalise_multiplier);
         refreshEnviroSpeed();
     }
@@ -28,6 +28,7 @@ public class Environment_Speed : MonoBehaviour {
         Debug.Log("enviro speed:" + enviro_speed);
     }
 
+	// Used to update the speed of the environment
     public static void refreshEnviroSpeed() {
         boat_speed = Rowing_Speed.speed;
         enviro_speed = boat_speed * normalise_multiplier;
