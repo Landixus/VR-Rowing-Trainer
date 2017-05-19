@@ -4,6 +4,9 @@
 /[Bb]uild/
 /[Bb]uilds/
 
+# Video files
+*.mp4
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
