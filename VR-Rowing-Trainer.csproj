@@ -195,6 +195,7 @@
   <ItemGroup>
     <None Include="Assets\Plugins\ANT\ANT_WrappedLib.bundle\Contents\Info.plist.xml" />
     <None Include="Assets\Plugins\ANT\ANT_WrappedLib.bundle\Contents\_CodeSignature\CodeResources.xml" />
+    <None Include="Assets\Plugins\Concept 2\Documentation\ReadMe.txt" />
     <None Include="Assets\SteamVR\InteractionSystem\Core\Shaders\SeeThru.shader" />
     <None Include="Assets\SteamVR\InteractionSystem\Core\Shaders\Silhouette.shader" />
     <None Include="Assets\SteamVR\InteractionSystem\Hints\Shaders\ControllerButtonHints.shader" />
