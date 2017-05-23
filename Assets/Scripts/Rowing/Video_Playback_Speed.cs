@@ -1,6 +1,6 @@
 ﻿/*  Author: Benjamin Ferguson
     Date: 10/05/17
-    Purpose: To match the speed of the 360 video playback with the rowing speed.
+    Purpose: To match the playback speed of the 360 video with the rowing speed.
 */
 
 using System.Collections;
