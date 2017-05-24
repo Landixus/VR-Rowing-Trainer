@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Get_Seat_Position : MonoBehaviour {
-    public static SteamVR_TrackedController controller; //controller object
-    public static Transform sp; //seat position and rotation
-    public static bool reposition; //tracks if the position has been changed
+    public SteamVR_TrackedController controller; //controller object
+    public Transform sp; //seat position and rotation
+    public bool reposition; //tracks if the position has been changed
 
 	// Use this for initialization
 	void Start () {
@@ -16,7 +16,7 @@ public class Get_Seat_Position : MonoBehaviour {
 	}
 
     //set position of the seat
-    public static void seatPos()
+    public void seatPos()
     {
         sp.position = controller.transform.position;
         sp.rotation = controller.transform.rotation;
@@ -27,9 +27,8 @@ public class Get_Seat_Position : MonoBehaviour {
     }
 
     //checks for trigger press
-    private static void trigger(object sender, ClickedEventArgs e)
+    private void trigger(object sender, ClickedEventArgs e)
     {
-       Debug.Log("got press down");
        seatPos();
     }
 }

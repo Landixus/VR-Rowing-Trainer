@@ -84,6 +84,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Pace_Boat.cs" />
     <Compile Include="Assets\Scripts\Rowing\Get_Seat_Position.cs" />
     <Compile Include="Assets\Scripts\Rowing\Rowing_Speed.cs" />
     <Compile Include="Assets\Scripts\Rowing\Training_Summary.cs" />
