@@ -32,7 +32,7 @@ public class Video_Playback_Speed : MonoBehaviour {
         boat_speed = Rowing_Speed.speed;
         video_playback = boat_speed * normalise_multiplier;
         video.playbackSpeed = (float) video_playback;
-        Debug.Log("boat speed:" + boat_speed);
-        Debug.Log("video playback speed:" + video_playback);
+        //Debug.Log("boat speed:" + boat_speed);
+        //Debug.Log("video playback speed:" + video_playback);
     }
 }

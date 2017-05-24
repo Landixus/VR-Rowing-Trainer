@@ -20,9 +20,10 @@ public class Get_Seat_Position : MonoBehaviour {
     {
         sp.position = controller.transform.position;
         sp.rotation = controller.transform.rotation;
-		Debug.Log("controller position:" + sp.position);
-        reposition = true;
-        controller.enabled = false;
+		//Debug.Log("controller position:" + sp.position);
+		//Debug.Log("controller rotation:" + sp.rotation);
+		reposition = true;
+        //controller.enabled = false;
     }
 
     //checks for trigger press
