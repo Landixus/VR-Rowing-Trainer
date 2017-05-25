@@ -21,12 +21,12 @@ public class Pace_Boat : MonoBehaviour {
 
     public void Get_Speed_Difference()
     {
-        playerspeed = Rowing_Speed.speed;
+        //playerspeed = Rowing_Speed.speed;
         deltaspeed = (float) (playerspeed - pbspeed);
     }
 
     public void Move_Pace_Boat()
     {
-        pb.position += Vector3.right * deltaspeed;
+        pb.position += Vector3.forward * deltaspeed;
     }
 }
