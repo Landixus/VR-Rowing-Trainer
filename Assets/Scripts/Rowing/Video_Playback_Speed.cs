@@ -28,7 +28,7 @@ public class Video_Playback_Speed : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         deltatime += Time.deltaTime;
-        Debug.Log("deltatime:" + deltatime);
+       // Debug.Log("deltatime:" + deltatime);
         if (deltatime >= framerate)
         {
             refreshVideoSpeed();
