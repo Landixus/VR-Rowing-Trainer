@@ -22,13 +22,15 @@ public class Get_Seat_Position : MonoBehaviour {
         sp.rotation = controller.transform.rotation;
 		//Debug.Log("controller position:" + sp.position);
 		//Debug.Log("controller rotation:" + sp.rotation);
-		reposition = true;
+		//reposition = true;
         //controller.enabled = false;
     }
 
     //checks for trigger press
     private void trigger(object sender, ClickedEventArgs e)
     {
-       seatPos();
+		//if(!reposition) {
+		seatPos();
+		//}
     }
 }
