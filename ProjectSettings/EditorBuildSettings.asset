@@ -6,5 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: f50c8dcd9639467419e66e478732d6d2
+  - enabled: 1
     path: Assets/Scenes/Ben's Scene.unity
     guid: 5c21460bead7ac74f98c487cc9b7b1a1

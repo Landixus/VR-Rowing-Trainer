@@ -1,16 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Pace_Boat : MonoBehaviour {
-    public const double pbspeed = 3.0; //speed of the pace boat in m/s
+    public double pbspeed; //speed of the pace boat in m/s
     public double playerspeed; //speed of the player boat in m/s
     public float deltaspeed; //difference in speed
     public Transform pb; //position of the pace boat
+    public GetTargetSpeed ts; //
+        
 
     // Use this for initialization
     void Start () {
-		pb = GameObject.Find("pace_boat").GetComponent<Transform>();
+        pbspeed = (double) ts.TargetSpeed();
     }
 	
 	// Update is called once per frame
