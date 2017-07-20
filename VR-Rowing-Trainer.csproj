@@ -84,6 +84,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Rowing\AccountManager.cs" />
     <Compile Include="Assets\Scripts\Rowing\GetTargetSpeed.cs" />
     <Compile Include="Assets\Scripts\Rowing\Get_Seat_Position.cs" />
     <Compile Include="Assets\Scripts\Rowing\LoadScene.cs" />

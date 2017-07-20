@@ -8,9 +8,9 @@ public class GetTargetSpeed : MonoBehaviour {
     public Slider targetSpeed; //target speed from slider
     public float SliderValue; //value from slider as float
 
-    public float TargetSpeed()
+    public float TargetSpeed(Slider ts)
     {
-        SliderValue = targetSpeed.value;
+        SliderValue = ts.value;
         return SliderValue;
     }
 }

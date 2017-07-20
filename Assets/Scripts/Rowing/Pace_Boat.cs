@@ -13,7 +13,7 @@ public class Pace_Boat : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        pbspeed = (double) ts.TargetSpeed();
+        // = (double) ts.TargetSpeed(Slider);
     }
 	
 	// Update is called once per frame
