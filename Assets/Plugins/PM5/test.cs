@@ -33,8 +33,8 @@ public class test : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        
-        error = 1;
+		
+		error = 1;
         error = tkcmdsetDDI_init(); 
         if (error == 0)
         {
