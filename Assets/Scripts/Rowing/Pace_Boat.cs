@@ -13,7 +13,9 @@ public class Pace_Boat : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        // = (double) ts.TargetSpeed(Slider);
+        ts = GameObject.Find("TargetSpeedSlider").GetComponent<GetTargetSpeed>();
+        Debug.Log(ts.SliderValue);
+        pbspeed = ts.SliderValue;
     }
 	
 	// Update is called once per frame
