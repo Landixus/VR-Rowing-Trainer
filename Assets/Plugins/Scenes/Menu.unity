@@ -284,7 +284,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 480, y: -447.90558}
+  m_AnchoredPosition: {x: 480, y: -460.49133}
   m_SizeDelta: {x: 320, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &21420342
@@ -749,7 +749,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 480, y: -305.74335}
+  m_AnchoredPosition: {x: 480, y: -272.74567}
   m_SizeDelta: {x: 320, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &362892693
@@ -823,6 +823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SliderValue: 0
+  ValueText: {fileID: 819115972}
 --- !u!1 &373139568
 GameObject:
   m_ObjectHideFlags: 0
@@ -1182,8 +1183,9 @@ GameObject:
   - component: {fileID: 819115971}
   - component: {fileID: 819115973}
   - component: {fileID: 819115972}
+  - component: {fileID: 819115974}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TargetSpeedValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1204,7 +1206,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 480, y: -242.16223}
+  m_AnchoredPosition: {x: 480, y: -317}
   m_SizeDelta: {x: 320, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &819115972
@@ -1239,13 +1241,31 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Select Target Speed
+  m_Text: 'Target Speed: 1'
 --- !u!222 &819115973
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 819115970}
+--- !u!114 &819115974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 819115970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1679637790, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 1
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
 --- !u!1 &824243103
 GameObject:
   m_ObjectHideFlags: 0
@@ -1907,7 +1927,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 320, y: 60}
+  m_SizeDelta: {x: 500, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1279566697
 MonoBehaviour:
@@ -1941,7 +1961,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Main Menu
+  m_Text: VR Rowing Trainer
 --- !u!222 &1279566698
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2059,6 +2079,60 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventSystem: {fileID: 1472577920}
   selectedObject: {fileID: 2009554851}
+--- !u!1 &1335418171
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1335418174}
+  - component: {fileID: 1335418172}
+  - component: {fileID: 1335418173}
+  m_Layer: 0
+  m_Name: SceneDataManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1335418172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1335418171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cdb7246a8701646b32224f489caefd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SliderValue: 0
+  ValueText: {fileID: 0}
+--- !u!114 &1335418173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1335418171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbdb167d541588d4cb6dfb2c22b8ded4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1335418174
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1335418171}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 766, y: 386.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1367326325
 GameObject:
   m_ObjectHideFlags: 0
@@ -2594,7 +2668,6 @@ GameObject:
   - component: {fileID: 1806015764}
   - component: {fileID: 1806015763}
   - component: {fileID: 1806015766}
-  - component: {fileID: 1806015767}
   m_Layer: 5
   m_Name: StartCustomSessionButton
   m_TagString: Untagged
@@ -2618,7 +2691,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 480, y: -369.32446}
+  m_AnchoredPosition: {x: 480, y: -359.1185}
   m_SizeDelta: {x: 320, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1806015763
@@ -2671,12 +2744,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1806015767}
-        m_MethodName: 
+      - m_Target: {fileID: 1335418172}
+        m_MethodName: TargetSpeed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2728,18 +2801,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e93af4109567ad8459136a0a6f619661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1806015767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1806015761}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95cdb7246a8701646b32224f489caefd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SliderValue: 0
 --- !u!1 &1810652275
 GameObject:
   m_ObjectHideFlags: 0
@@ -3192,7 +3253,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 480, y: -163.58112}
+  m_AnchoredPosition: {x: 480, y: -186.37283}
   m_SizeDelta: {x: 320, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2009554853
