@@ -12,9 +12,8 @@ public class AccountManager : MonoBehaviour {
     
     public void CheckAccount()
     {
-        //string path = "C:\\Users\\Ben\\Documents\\GitHub\\VR-Rowing-Trainer\\Assets\\Accounts\\";
-        string path = "..\\..\\Accounts\\";
-        Debug.Log(path);
+        string path = "C:\\Users\\Ben\\Documents\\GitHub\\VR-Rowing-Trainer\\Assets\\Accounts\\";
+        
         if (Directory.Exists(path + username.text))
         {
             loggedInUser = username.text;

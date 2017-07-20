@@ -19,7 +19,7 @@ public class MenuInput : MonoBehaviour {
         }    
     }
 
-    private void deselect()
+    private void onDisable()
     {
         buttonSelected = false;
     }

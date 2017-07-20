@@ -1258,6 +1258,7 @@ GameObject:
   - component: {fileID: 824243107}
   - component: {fileID: 824243106}
   - component: {fileID: 824243105}
+  - component: {fileID: 824243108}
   m_Layer: 5
   m_Name: AccountMenuPanel
   m_TagString: Untagged
@@ -1342,6 +1343,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 824243103}
+--- !u!114 &824243108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 824243103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7555293889b1c6342b032aad2367e42b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSystem: {fileID: 1472577920}
+  selectedObject: {fileID: 76500603}
 --- !u!1 &828014960
 GameObject:
   m_ObjectHideFlags: 0
@@ -1946,6 +1960,7 @@ GameObject:
   - component: {fileID: 1297915758}
   - component: {fileID: 1297915757}
   - component: {fileID: 1297915756}
+  - component: {fileID: 1297915759}
   m_Layer: 5
   m_Name: TainingMenuPanel
   m_TagString: Untagged
@@ -2032,6 +2047,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1297915754}
+--- !u!114 &1297915759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1297915754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7555293889b1c6342b032aad2367e42b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSystem: {fileID: 1472577920}
+  selectedObject: {fileID: 2009554851}
 --- !u!1 &1367326325
 GameObject:
   m_ObjectHideFlags: 0
@@ -2091,6 +2119,7 @@ GameObject:
   - component: {fileID: 1427702193}
   - component: {fileID: 1427702192}
   - component: {fileID: 1427702191}
+  - component: {fileID: 1427702194}
   m_Layer: 5
   m_Name: MainMenuPanel
   m_TagString: Untagged
@@ -2175,6 +2204,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1427702189}
+--- !u!114 &1427702194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1427702189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7555293889b1c6342b032aad2367e42b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSystem: {fileID: 1472577920}
+  selectedObject: {fileID: 854400581}
 --- !u!1 &1472577918
 GameObject:
   m_ObjectHideFlags: 0
