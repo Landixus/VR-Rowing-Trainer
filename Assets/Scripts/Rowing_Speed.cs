@@ -9,7 +9,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-///using ANT_Managed_Library;
+//using ANT_Managed_Library;
 //using Dynastream.Fit;
 
 public class Rowing_Speed : MonoBehaviour {
@@ -41,7 +41,7 @@ public class Rowing_Speed : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		/*
+		
         double change = speedChange * Time.deltaTime;
 
         if (((speedChange > 0) && (speed < targetSpeed)) ||
@@ -60,7 +60,7 @@ public class Rowing_Speed : MonoBehaviour {
         }
         //Debug.Log("Speed:" + speed);
         distance = distance + getDistance();
-		return;*/
+		return;
     }
 	/*
     public static void refreshAntChannel() {
@@ -74,13 +74,13 @@ public class Rowing_Speed : MonoBehaviour {
         channel.onReceiveData += Channel_onReceiveData;
         return;
     }
-
+	
     private static void Channel_onChannelResponse(ANT_Response response)
     {
         return;
     }
-
-    private static void Channel_onReceiveData(Byte[] data)
+	*/
+	private static void Channel_onReceiveData(Byte[] data)
     {
         //data description
         //0-1 Cadence Event Time
@@ -144,5 +144,5 @@ public class Rowing_Speed : MonoBehaviour {
         //move player boat 
         return distanceDelta;
     }
-	*/
+	
 }

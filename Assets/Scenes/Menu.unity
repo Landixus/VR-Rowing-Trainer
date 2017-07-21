@@ -2087,6 +2087,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1335418174}
+  - component: {fileID: 1335418175}
   - component: {fileID: 1335418172}
   - component: {fileID: 1335418173}
   m_Layer: 0
@@ -2108,7 +2109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SliderValue: 0
-  ValueText: {fileID: 0}
+  ValueText: {fileID: 819115972}
 --- !u!114 &1335418173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2131,30 +2132,14 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1367326325
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1367326327}
-  - component: {fileID: 1367326326}
-  m_Layer: 5
-  m_Name: AccountManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1367326326
+--- !u!114 &1335418175
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1367326325}
+  m_GameObject: {fileID: 1335418171}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9a7f0567cb91ea4983339b3ac180095, type: 3}
@@ -2163,24 +2148,6 @@ MonoBehaviour:
   username: {fileID: 76500605}
   loggedInUser: 
   userPath: 
---- !u!224 &1367326327
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1367326325}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.50729, y: 0.50729, z: 0.50729}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 960.00323, y: 473.27856}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1427702189
 GameObject:
   m_ObjectHideFlags: 0
@@ -2502,7 +2469,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1367326326}
+      - m_Target: {fileID: 0}
         m_MethodName: CheckAccount
         m_Mode: 1
         m_Arguments:

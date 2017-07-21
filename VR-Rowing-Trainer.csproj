@@ -84,18 +84,18 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Rowing\AccountManager.cs" />
-    <Compile Include="Assets\Scripts\Rowing\DontDestroy.cs" />
-    <Compile Include="Assets\Scripts\Rowing\GetTargetSpeed.cs" />
-    <Compile Include="Assets\Scripts\Rowing\Get_Seat_Position.cs" />
-    <Compile Include="Assets\Scripts\Rowing\LoadScene.cs" />
-    <Compile Include="Assets\Scripts\Rowing\MenuInput.cs" />
-    <Compile Include="Assets\Scripts\Rowing\Pace_Boat.cs" />
-    <Compile Include="Assets\Scripts\Rowing\QuitGame.cs" />
-    <Compile Include="Assets\Scripts\Rowing\Rowing_Speed.cs" />
-    <Compile Include="Assets\Scripts\Rowing\Training_Summary.cs" />
-    <Compile Include="Assets\Scripts\Rowing\Video_Playback_Speed.cs" />
-    <Compile Include="Assets\Scripts\Rowing\look.cs" />
+    <Compile Include="Assets\Scripts\AccountManager.cs" />
+    <Compile Include="Assets\Scripts\DontDestroy.cs" />
+    <Compile Include="Assets\Scripts\GetTargetSpeed.cs" />
+    <Compile Include="Assets\Scripts\Get_Seat_Position.cs" />
+    <Compile Include="Assets\Scripts\LoadScene.cs" />
+    <Compile Include="Assets\Scripts\MenuInput.cs" />
+    <Compile Include="Assets\Scripts\Pace_Boat.cs" />
+    <Compile Include="Assets\Scripts\QuitGame.cs" />
+    <Compile Include="Assets\Scripts\Rowing_Speed.cs" />
+    <Compile Include="Assets\Scripts\Training_Summary.cs" />
+    <Compile Include="Assets\Scripts\Video_Playback_Speed.cs" />
+    <Compile Include="Assets\Scripts\look.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_LaserPointer.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_Teleporter.cs" />
