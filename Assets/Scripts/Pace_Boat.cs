@@ -31,7 +31,7 @@ public class Pace_Boat : MonoBehaviour {
 
     public void Get_Speed_Difference()
     {
-        //playerspeed = Rowing_Speed.speed;
+        playerspeed = Rowing_Speed.speed;
         deltaspeed = (float) (playerspeed - pbspeed);
     }
 

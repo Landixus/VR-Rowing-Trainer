@@ -22,24 +22,27 @@ public class Video_Playback_Speed : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         video = GameObject.Find("VideoSphere").GetComponent<VideoPlayer>();
-		boat_speed = 0;
+		boat_speed = 5; ;
+		refreshVideoSpeed();
         normalise_multiplier = 1 / video_speed;
-        framerate = 0.5f;
-        deltatime = 0.0f;
+        //framerate = 0.05f;
+        //deltatime = 0.0f;
     }
 	
 	// Update is called once per frame
 	void Update () {
         deltatime += Time.deltaTime;
+		//boat_speed = Rowing_Speed.speed;
 		SpeedDisplay.text = convertSpeed().ToString() + "km/h";
-       // Debug.Log("deltatime:" + deltatime);
-        if (deltatime >= framerate)
-        {
-            refreshVideoSpeed();
-            deltatime = 0.0f;
-        }
-        
-    }
+		// Debug.Log("deltatime:" + deltatime);
+		refreshVideoSpeed();
+		/* if (deltatime >= framerate)
+		 {
+			 refreshVideoSpeed();
+			 deltatime = 0.0f;
+		 }
+		 */
+	}
 
 	// Used to update the speed of the environment
     public void refreshVideoSpeed() {

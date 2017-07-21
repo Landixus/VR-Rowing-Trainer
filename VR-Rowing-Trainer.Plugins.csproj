@@ -81,6 +81,9 @@
     <Compile Include="Assets\Plugins\PM5\test.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Ant\Plugins\Ant\License.txt" />
+    <None Include="Assets\Ant\Plugins\Fit\FIT license.txt" />
+    <None Include="Assets\Ant\readme.txt" />
     <None Include="Assets\SteamVR\InteractionSystem\Core\Shaders\SeeThru.shader" />
     <None Include="Assets\SteamVR\InteractionSystem\Core\Shaders\Silhouette.shader" />
     <None Include="Assets\SteamVR\InteractionSystem\Hints\Shaders\ControllerButtonHints.shader" />
