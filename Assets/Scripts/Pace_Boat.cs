@@ -10,13 +10,13 @@ public class Pace_Boat : MonoBehaviour {
     public Transform pb; //position of the pace boat
     //public GetTargetSpeed ts; //
     //public GameObject slider;
-
+	/*
     private void Awake()
     {
         pbspeed = GameObject.Find("SceneDataManager").GetComponent<GetTargetSpeed>().SliderValue;
         Debug.Log(pbspeed);
     }
-
+	*/
 
     // Use this for initialization
     void Start () {
