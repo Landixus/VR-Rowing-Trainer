@@ -2404,7 +2404,6 @@ GameObject:
   - component: {fileID: 1568598207}
   - component: {fileID: 1568598206}
   - component: {fileID: 1568598205}
-  - component: {fileID: 1568598208}
   m_Layer: 5
   m_Name: LoginButton
   m_TagString: Untagged
@@ -2470,7 +2469,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1568598208}
+      - m_Target: {fileID: 1335418175}
         m_MethodName: CheckAccount
         m_Mode: 1
         m_Arguments:
@@ -2516,20 +2515,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1568598203}
---- !u!114 &1568598208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1568598203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9a7f0567cb91ea4983339b3ac180095, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  username: {fileID: 76500605}
-  loggedInUser: 
-  userPath: 
 --- !u!1 &1701489283
 GameObject:
   m_ObjectHideFlags: 0
