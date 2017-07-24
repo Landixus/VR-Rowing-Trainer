@@ -8,7 +8,8 @@ public class Pace_Boat : MonoBehaviour {
     public double playerspeed; //speed of the player boat in m/s
     public float deltaspeed; //difference in speed
     public Transform pb; //position of the pace boat
-    //public GetTargetSpeed ts; //
+	public Video_Playback vb;
+	//public GetTargetSpeed ts; //
     //public GameObject slider;
 	/*
     private void Awake()
@@ -20,8 +21,9 @@ public class Pace_Boat : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-       
-    }
+		pbspeed = 2;
+       vb = GameObject.Find("VideoSphere").GetComponent<Video_Playback>();
+	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -31,7 +33,7 @@ public class Pace_Boat : MonoBehaviour {
 
     public void Get_Speed_Difference()
     {
-        playerspeed = Rowing_Speed.speed;
+        playerspeed = vb.video_playback;
         deltaspeed = (float) (playerspeed - pbspeed);
     }
 

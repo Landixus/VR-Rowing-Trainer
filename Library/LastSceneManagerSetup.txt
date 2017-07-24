@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Ben's Scene.unity
+- path: Assets/Scenes/Free Session.unity
   isLoaded: 1
   isActive: 1

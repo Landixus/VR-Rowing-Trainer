@@ -25,7 +25,7 @@ public class Video_Playback : MonoBehaviour {
     public double maxSpeed; //speed at which the player needs to slow down
     public AudioClip speedUp;
     public AudioClip slowDown;
-    private double lastPlayed; //time since audio was last played
+    private float lastPlayed; //time since audio was last played
     private Color green;
     private Color red;
 
@@ -33,7 +33,7 @@ public class Video_Playback : MonoBehaviour {
     void Start () {
         video = GameObject.Find("VideoSphere").GetComponent<VideoPlayer>();
         pb = GameObject.Find("SceneController").GetComponent<Pace_Boat>();
-        boat_speed = 5; ;
+        boat_speed = 1; ;
 		refreshVideoSpeed();
         normalise_multiplier = 1 / video_speed;
         lastPlayed = 0;
@@ -52,13 +52,16 @@ public class Video_Playback : MonoBehaviour {
         if (video_playback > pb.pbspeed)
         {
             SpeedDisplay.color = green;
+			Debug.Log("Colour green");
         }
         else
         {
             SpeedDisplay.color = red;
-        }
+			Debug.Log("Colour red");
+		}
         SpeedDisplay.text = convertSpeed().ToString() + "km/h";
-        lastPlayed += deltatime;
+        lastPlayed += Time.deltaTime;
+		//Debug.Log(lastPlayed);
         if (lastPlayed > 5)
         {
             audioController();
@@ -88,14 +91,16 @@ public class Video_Playback : MonoBehaviour {
 
     public void audioController()
     {
-       if (video_playback < minSpeed)
+       if (convertSpeed() < minSpeed)
         {
+			Debug.Log("Speed up");
             GetComponent<AudioSource>().PlayOneShot(speedUp);
             lastPlayed = 0;
         }
-       if (video_playback < maxSpeed)
+       if (convertSpeed() > maxSpeed)
         {
-            GetComponent<AudioSource>().PlayOneShot(slowDown);
+			Debug.Log("Slow Down");
+			GetComponent<AudioSource>().PlayOneShot(slowDown);
             lastPlayed = 0;
         }
     }
