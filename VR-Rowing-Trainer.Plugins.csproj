@@ -79,11 +79,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Plugins\PM5\test.cs" />
+    <Compile Include="Assets\Plugins\VRStandardAssets\Reticle.cs" />
+    <Compile Include="Assets\Plugins\VRStandardAssets\VREyeRaycaster.cs" />
+    <Compile Include="Assets\Plugins\VRStandardAssets\VRInput.cs" />
+    <Compile Include="Assets\Plugins\VRStandardAssets\VRInteractiveItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Ant\Plugins\Ant\License.txt" />
     <None Include="Assets\Ant\Plugins\Fit\FIT license.txt" />
     <None Include="Assets\Ant\readme.txt" />
+    <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Advanced.shader" />
+    <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
+    <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\WaterInclude.cginc" />
     <None Include="Assets\SteamVR\InteractionSystem\Core\Shaders\SeeThru.shader" />
     <None Include="Assets\SteamVR\InteractionSystem\Core\Shaders\Silhouette.shader" />
     <None Include="Assets\SteamVR\InteractionSystem\Hints\Shaders\ControllerButtonHints.shader" />
