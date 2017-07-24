@@ -24,7 +24,7 @@ public class Training_Summary : MonoBehaviour {
 	public static double distance; //distance the user has travelled
 	private const int length = 2000; //length of the training session
 
-    private float framerate; //rate to refresh video playback speed
+    private float datarate; //rate to refresh video playback speed
     private float deltatime; //time since last refresh
 
     public GameObject Summary;
@@ -43,7 +43,7 @@ public class Training_Summary : MonoBehaviour {
         split = new double[4];
         splitTime = 0;
 		//used to only get data every 1s
-        framerate = 1f;
+        datarate = 1f;
         deltatime = 0.0f;
 
 		//text objects for displaying the values to the user
@@ -60,7 +60,7 @@ public class Training_Summary : MonoBehaviour {
         checkSplit();
         deltatime += Time.deltaTime;
         // Debug.Log("deltatime:" + deltatime);
-        if (deltatime >= framerate)
+        if (deltatime >= datarate)
         {
             updateSummary();
             deltatime = 0.0f;

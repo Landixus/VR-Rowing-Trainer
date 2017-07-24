@@ -276,7 +276,7 @@
     <Compile Include="Assets\Scripts\QuitGame.cs" />
     <Compile Include="Assets\Scripts\Rowing_Speed.cs" />
     <Compile Include="Assets\Scripts\Training_Summary.cs" />
-    <Compile Include="Assets\Scripts\Video_Playback_Speed.cs" />
+    <Compile Include="Assets\Scripts\Video_Playback.cs" />
     <Compile Include="Assets\Scripts\look.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_LaserPointer.cs" />
