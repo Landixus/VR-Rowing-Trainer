@@ -2,64 +2,42 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
-//using System;
+using System;
 
 // Data Type Definitions
-//using INT8_T = System.Char;
 using UINT16_T = System.UInt16;
 using UINT32_T = System.UInt32;
 using ERRCODE_T = System.UInt16;
-using PTR_T = System.Text.StringBuilder;
-
-
+using PTR_T = System.UIntPtr;
 
 public class test : MonoBehaviour {
-
-
-
-	public ERRCODE_T error;
-
-	public UINT16_T cmd_data_size, rsp_data_size;
-	public UINT32_T[] cmd_data;
-	public UINT32_T[] rsp_data;
-	public PTR_T ptr;
-	public UINT16_T output;
-
-
+	
 	[DllImport("PM3DDICP.dll")]
+	// Initializes the Command Set Toolkit functions.
 	static extern ERRCODE_T tkcmdsetDDI_init();
+
 	[DllImport("PM3CsafeCP.dll")]
-	static extern ERRCODE_T tkcmdsetCSAFE_init_protocol(UINT16_T timeout);  // Initializes the device to accept CSAFE input
-	/*
+	//Initializes the DLL error code interface and configures the CSAFE protocol.
+	static extern ERRCODE_T tkcmdsetCSAFE_init_protocol(UINT16_T timeout);
+	
     [DllImport("PM3DDICP.dll")]
-	static extern ERRCODE_T tkcmdsetDDI_discover_pm3s(byte[] productname, UINT16_T address, ref UIntPtr num_units);
+	// Discover all PM3 devices connected to the PC via various media interfaces.
+	static extern ERRCODE_T tkcmdsetDDI_discover_pm3s(byte[] productname, UINT16_T address, ref UIntPtr num_units); 
 	
     [DllImport("PM3CsafeCP.dll")]
-    static extern ERRCODE_T tkcmdsetCSAFE_command(UINT16_T address);		//, UINT16_T cmd_data_size, UINT32_T[] cmd_data, UINT16_T rsp_data_size, UINT32_T[] rsp_data);
-	*/
+	// Sends a CSAFE command to a PM device and returns the response data.
+	static extern ERRCODE_T tkcmdsetCSAFE_command(UINT16_T address);		
+	
 	// Use this for initialization
 	void Start() {
 
-		UINT16_T err;
-		err = 1;
-		err = tkcmdsetDDI_init();
-		if (err == 0) {
-			Debug.Log("PM5 DDI Init Success");
-		} else {
-			Debug.Log("PM5 DDI Init Failed");
-		}
-		
-        error = 500;
-		error = tkcmdsetCSAFE_init_protocol(1000);               // 1000 = Timeout in milliseconds
-        if (error == 0) {
-            Debug.Log("PM5 CSAFE Init Success");
-        } else {
-            Debug.Log("PM5 CSAFE Init Failed");
-        }
-        /*	
-		string str = "Concept2 Performance Monitor  (PM5)";
+		Inititialize();
+		/*
+        ERRCODE_T error = 500;
+			
+		string str = "Concept2 Performance Monitor 5 (PM5)";
 		byte[] productname = System.Text.Encoding.UTF8.GetBytes(str);
-		int testInt = 1;
+		int testInt = 999;
 		UIntPtr testPtr = (UIntPtr)testInt;
 		UINT16_T address = 0;
 
@@ -70,9 +48,10 @@ public class test : MonoBehaviour {
 		} else {
 			Debug.Log("PM5 DDI Discover PM Failed");
 		}
-		Debug.Log("Devices: " + address);
-		*/
-		/*
+		string hmm = testPtr.ToString();
+		Debug.Log("Devices: " + hmm);
+		
+		
         string str = "test";
      
         unsafe
@@ -112,10 +91,47 @@ public class test : MonoBehaviour {
         }
 		*/
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	void Inititialize() {
+
+		ERRCODE_T error = 1;
+		error = tkcmdsetDDI_init();
+		Handle_error(error, "tkcmdsetDDI_init");
+
+		// Timeout set to 1000ms
+		error = 1;
+		error = tkcmdsetCSAFE_init_protocol(1000);
+		Handle_error(error, "tkcmdsetCSAFE_init_protocol");
+
+		Device_counter();
+
+		return;
+	}
+
+	void Device_counter() {
+		
+		string product_name_str = "Concept2 Performance Monitor 5 (PM5)";
+		byte[] product_name_ptr = System.Text.Encoding.UTF8.GetBytes(product_name_str);
+		UINT16_T address = 0;
+		UINT16_T num_units = 0;
+		PTR_T num_units_ptr = (PTR_T)num_units;
+		ERRCODE_T error = 1;
+		error = tkcmdsetDDI_discover_pm3s(product_name_ptr, address, ref num_units_ptr);
+		Handle_error(error, "tkcmdsetDDI_discover_pm3s");
+		Debug.Log("PM5's connected: " + num_units_ptr.ToString());
+		return;
+	}
+
+	void Handle_error(ERRCODE_T error_value, String error_identifier) {
+		if (error_value != 0) {
+			Debug.Log("Failure to load " + error_identifier);
+		}
+		return;
 	}
 	/*
 	public static void Test_init() {
