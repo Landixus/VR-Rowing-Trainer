@@ -8,7 +8,7 @@ public class MenuInput : MonoBehaviour {
     public EventSystem eventSystem;
     public GameObject selectedObject;
 
-    private bool buttonSelected;
+    public bool buttonSelected;
 
     void Update()
     {
@@ -19,8 +19,9 @@ public class MenuInput : MonoBehaviour {
         }    
     }
 
-    private void onDisable()
+    public void onDisable()
     {
+		Debug.Log("Button Unselected");
         buttonSelected = false;
     }
 }
