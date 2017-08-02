@@ -22,82 +22,27 @@ public class test : MonoBehaviour {
 	
     [DllImport("PM3DDICP.dll")]
 	// Discover all PM3 devices connected to the PC via various media interfaces.
-	static extern ERRCODE_T tkcmdsetDDI_discover_pm3s(byte[] productname, UINT16_T address, ref UIntPtr num_units); 
-	
-    [DllImport("PM3CsafeCP.dll")]
+	static extern ERRCODE_T tkcmdsetDDI_discover_pm3s(byte[] productname, UINT16_T address, ref PTR_T num_units);
+
+	[DllImport("PM3CsafeCP.dll")]
 	// Sends a CSAFE command to a PM device and returns the response data.
-	static extern ERRCODE_T tkcmdsetCSAFE_command(UINT16_T address);		
-	
+	static extern ERRCODE_T tkcmdsetCSAFE_command(UINT16_T unit_address, UINT16_T cmd_data_size, byte[] cmd_data, ref PTR_T rsp_data_size, byte[] rsp_data);
+
 	// Use this for initialization
 	void Start() {
 
-		Inititialize();
-		/*
-        ERRCODE_T error = 500;
-			
-		string str = "Concept2 Performance Monitor 5 (PM5)";
-		byte[] productname = System.Text.Encoding.UTF8.GetBytes(str);
-		int testInt = 999;
-		UIntPtr testPtr = (UIntPtr)testInt;
-		UINT16_T address = 0;
+		Initialize();
 
-		error = 1;
-		error = tkcmdsetDDI_discover_pm3s(productname, address, ref testPtr);
-		if (error == 0) {
-			Debug.Log("PM5 DDI Discover PM Success");
-		} else {
-			Debug.Log("PM5 DDI Discover PM Failed");
-		}
-		string hmm = testPtr.ToString();
-		Debug.Log("Devices: " + hmm);
-		
-		
-        string str = "test";
-     
-        unsafe
-        {
-            fixed (char * strptr = str)
-            {
-                error = tkcmdsetDDI_discover_pm3s((INT8_T)strptr, address, output);
-            }
-        }
-        if (error == 0)
-        {
-            Debug.Log("PM5 DDI Discover PM Success");
-        }
-        else
-        {
-            Debug.Log("PM5 DDI Discover PM Failed");
-        }
-        
-        // Get time
-        address = 0xA0;
-        cmd_data_size = 0;
-        //cmd_data = new UINT32_T[5];
-        rsp_data_size = 64;
-        //rsp_data = new UINT32_T[5];
-
-        
-
-		
-		error = 1;
-
-        error = tkcmdsetCSAFE_command(address);//, cmd_data_size, cmd_data, rsp_data_size, rsp_data);
-        if (error == 0) {
-            Debug.Log("PM5 CSAFE Get Time Success");
-        }
-        else {
-            Debug.Log("PM5 CSAFE Get Time Failed");
-        }
-		*/
 	}
 
 	// Update is called once per frame
 	void Update () {
-		
+		float time = Get_Time();
+		Debug.Log("Time: " + time);
 	}
 
-	void Inititialize() {
+	// Initialize communication protocols with the Concept2 device
+	void Initialize() {
 
 		ERRCODE_T error = 1;
 		error = tkcmdsetDDI_init();
@@ -113,6 +58,8 @@ public class test : MonoBehaviour {
 		return;
 	}
 
+	// Detects the number of devices connected
+	// Note: Currently only looks for PM5 devices but can be rewritten to search for other PM Models
 	void Device_counter() {
 		
 		string product_name_str = "Concept2 Performance Monitor 5 (PM5)";
@@ -132,6 +79,18 @@ public class test : MonoBehaviour {
 			Debug.Log("Failure to load " + error_identifier);
 		}
 		return;
+	}
+
+	float Get_Time() {
+		UINT16_T unit_address = 0, cmd_data_size = 0;
+		byte[] cmd_data = new byte[4], rsp_data = new byte[4];
+		cmd_data[0] = 0xA0;
+		UINT16_T rsp_data_size_val = 32;
+		PTR_T rsp_data_size = (PTR_T)rsp_data_size_val;
+		ERRCODE_T error = 1;
+		error = tkcmdsetCSAFE_command(unit_address, cmd_data_size, cmd_data, ref rsp_data_size, rsp_data);
+		Handle_error(error, "tkcmdsetCSAFE_command: CSAFE_PM_GET_WORKTIME");
+		return rsp_data[3];
 	}
 	/*
 	public static void Test_init() {
