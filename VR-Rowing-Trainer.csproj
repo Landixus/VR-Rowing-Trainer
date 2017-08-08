@@ -271,6 +271,7 @@
     <Compile Include="Assets\Scripts\Menu Scripts\LoadScene.cs" />
     <Compile Include="Assets\Scripts\Menu Scripts\MenuInput.cs" />
     <Compile Include="Assets\Scripts\Menu Scripts\QuitGame.cs" />
+    <Compile Include="Assets\Scripts\PM5 Scripts\PM5_Communication.cs" />
     <Compile Include="Assets\Scripts\Training Scripts\FPS.cs" />
     <Compile Include="Assets\Scripts\Training Scripts\Get_Seat_Position.cs" />
     <Compile Include="Assets\Scripts\Training Scripts\Pace_Boat.cs" />

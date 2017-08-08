@@ -18,7 +18,7 @@ using PTR_T = System.UIntPtr;
 
 public class PM5_Communication : MonoBehaviour {
 
-	public static double current_Speed = 0;
+	public double current_Speed = 0;
 	public double set_Speed; // Used to set a manual speed for testing purposes
 	// Counter controls how often current_Speed is changed
 	// Timeout senses the rower hasn't rowed so speed can be set to 0
@@ -122,7 +122,7 @@ public class PM5_Communication : MonoBehaviour {
 	}
 
 	// Calculates the current change of speed of the rower for every interval.
-	private static void Get_Speed() {
+	private void Get_Speed() {
 		UINT32_T time = Get_Time();
 		UINT32_T current_Distance = Get_Distance();
 		if (counter <= time) {

@@ -78,7 +78,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Plugins\PM5\test.cs" />
     <Compile Include="Assets\Plugins\VRStandardAssets\Reticle.cs" />
     <Compile Include="Assets\Plugins\VRStandardAssets\VREyeRaycaster.cs" />
     <Compile Include="Assets\Plugins\VRStandardAssets\VRInput.cs" />
