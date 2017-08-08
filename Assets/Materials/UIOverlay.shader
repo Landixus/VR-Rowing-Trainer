@@ -1,11 +1,10 @@
 ﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
-Shader "UI/Overlay"
+Shader "UI/Default_OverlayNoZTest"
 {
 	Properties
 	{
-		[PerRendererData] _MainTex("Font Texture", 2D) = "white" {}
-
+		[PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
 	_Color("Tint", Color) = (1,1,1,1)
 
 		_StencilComp("Stencil Comparison", Float) = 8
@@ -19,11 +18,9 @@ Shader "UI/Overlay"
 
 		SubShader
 	{
-		LOD 100
-
 		Tags
 	{
-		"Queue" = "Transparent"
+		"Queue" = "Overlay"
 		"IgnoreProjector" = "True"
 		"RenderType" = "Transparent"
 		"PreviewType" = "Plane"
@@ -42,8 +39,7 @@ Shader "UI/Overlay"
 		Cull Off
 		Lighting Off
 		ZWrite Off
-		ZTest Always
-		Offset - 1, -1
+		ZTest Off
 		Blend SrcAlpha OneMinusSrcAlpha
 		ColorMask[_ColorMask]
 
@@ -53,45 +49,42 @@ Shader "UI/Overlay"
 #pragma vertex vert
 #pragma fragment frag
 #include "UnityCG.cginc"
-#include "UnityUI.cginc"
 
 		struct appdata_t
 	{
-		float4 vertex : POSITION;
+		float4 vertex   : POSITION;
+		float4 color    : COLOR;
 		float2 texcoord : TEXCOORD0;
-		float4 color : COLOR;
 	};
 
 	struct v2f
 	{
-		float4 vertex : SV_POSITION;
-		half2 texcoord : TEXCOORD0;
+		float4 vertex   : SV_POSITION;
 		fixed4 color : COLOR;
+		half2 texcoord  : TEXCOORD0;
 	};
 
-	sampler2D _MainTex;
-	float4 _MainTex_ST;
 	fixed4 _Color;
-	fixed4 _TextureSampleAdd;
 
-	v2f vert(appdata_t v)
+	v2f vert(appdata_t IN)
 	{
-		v2f o;
-		o.vertex = UnityObjectToClipPos(v.vertex);
-		o.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
-		o.color = v.color * _Color;
+		v2f OUT;
+		OUT.vertex = UnityObjectToClipPos(IN.vertex);
+		OUT.texcoord = IN.texcoord;
 #ifdef UNITY_HALF_TEXEL_OFFSET
-		o.vertex.xy += (_ScreenParams.zw - 1.0)*float2(-1,1);
+		OUT.vertex.xy += (_ScreenParams.zw - 1.0)*float2(-1,1);
 #endif
-
-		return o;
+		OUT.color = IN.color * _Color;
+		return OUT;
 	}
 
-	fixed4 frag(v2f i) : SV_Target
+	sampler2D _MainTex;
+
+	fixed4 frag(v2f IN) : SV_Target
 	{
-		fixed4 col = (tex2D(_MainTex, i.texcoord) + _TextureSampleAdd) * i.color;
-	clip(col.a - 0.01);
-	return col;
+		half4 color = tex2D(_MainTex, IN.texcoord) * IN.color;
+		clip(color.a - 0.01);
+		return color;
 	}
 		ENDCG
 	}
