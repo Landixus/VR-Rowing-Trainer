@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -6,32 +7,22 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using VRStandardAssets.Utils;
 
+
 public class MenuInput : MonoBehaviour {
 
 	public EventSystem eventSystem;
-	public GameObject selectedObject;
 	private Button selectedButton;
-	public bool pointerOver;
-
-	//private StandaloneInputModule sim;
+	private double selectTimer;
 	private bool buttonSelected;
 
 	private VRInteractiveItem interactiveItem;
 	public VREyeRaycaster eyeRaycaster;
-	//public UnityEvent GazeEnterEvent;
-	//public UnityEvent GazeExitEvent;
 
 	private void Start() {
-		
-		//interactiveItem = GetComponent<VRInteractiveItem>();
-		//interactiveItem.OnOver += onGazeEnter;
-		//interactiveItem.OnOut += onGazeExit;
-		//sim = eventSystem.GetComponent<StandaloneInputModule>();
-		//Debug.Log(sim.input);
+		selectTimer = 0.0;
 	}
 
 	void Update() {
-		interactiveItem = eyeRaycaster.CurrentInteractible;
 		rayHit();
 	}
 
@@ -57,37 +48,48 @@ public class MenuInput : MonoBehaviour {
 			selectedButton.onClick.Invoke();
 		}
 	}
-	/*
-	void onGazeEnter() {
-		GazeEnterEvent.Invoke();
-	}
-
-	void onGazeExit() {
-		GazeExitEvent.Invoke();
-	}
 
 	public void EnterGaze() {
-		Debug.Log("Gaze Enter");
-		if (!buttonSelected) {
+		interactiveItem = eyeRaycaster.CurrentInteractible;
+		Debug.Log("Gaze Enter " + interactiveItem.GetComponent<Button>());
+		if (!buttonSelected && interactiveItem.tag == "Button") {
+			
 			buttonSelected = true;
-			if (interactiveItem.tag == "Button") {
-				selectedButton = interactiveItem.GetComponent<Button>();
-				selectedButton.Select();
-
-			}
+			selectedButton = interactiveItem.GetComponent<Button>();
+			selectedButton.Select();
+			Debug.Log(interactiveItem.name + " selected");
+			//click timer creates crash
+			//clickTimer();
 		}
 	}
 
 	public void ExitGaze() {
-		Debug.Log("Gaze Exit");
+		Debug.Log("Gaze Exit " + interactiveItem.GetComponent<Button>());
 		if (buttonSelected) {
 			eventSystem.SetSelectedGameObject(null);
 			buttonSelected = false;
 		}
 	}
 
+	public void clickTimer() {
+		float startTime = Time.time;
+		Debug.Log("Start time: " + startTime);
+		bool timeElapsed = true;
+
+		while (Time.time - startTime < 3.0f) {
+			if (!buttonSelected) {
+				timeElapsed = false;
+			}
+		}
+		Debug.Log("End time: " + Time.time);
+		if (timeElapsed) {
+			//selectedButton.onClick.Invoke();
+			Debug.Log("time elapsed");
+		}
+	}
+
 	public void onDisable() {
 		buttonSelected = false;
 	}
-	*/
+	
 }

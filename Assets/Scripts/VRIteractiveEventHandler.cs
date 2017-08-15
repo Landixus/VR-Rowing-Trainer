@@ -8,13 +8,15 @@ using UnityEngine.Events;
 public class VRIteractiveEventHandler : MonoBehaviour {
 
 	private VRInteractiveItem interactiveItem;
-	public UnityEvent GazeEnterEvent;
-	public UnityEvent GazeExitEvent;
+	//public UnityEvent GazeEnterEvent;
+	//public UnityEvent GazeExitEvent;
+
+	public MenuInput menuInput;
 	// Use this for initialization
 	void Start () {
 		interactiveItem = GetComponent<VRInteractiveItem>();
 		interactiveItem.OnOver += onGazeEnter;
-		interactiveItem.OnOver += onGazeExit;
+		interactiveItem.OnOut += onGazeExit;
 	}
 	
 	// Update is called once per frame
@@ -23,11 +25,13 @@ public class VRIteractiveEventHandler : MonoBehaviour {
 	}
 
 	void onGazeEnter() {
-		GazeEnterEvent.Invoke();
+		//GazeEnterEvent.Invoke();
+		menuInput.EnterGaze();
 	}
 
 	void onGazeExit() {
-		GazeExitEvent.Invoke();
+		//GazeExitEvent.Invoke();
+		menuInput.ExitGaze();
 	}
 
 }
