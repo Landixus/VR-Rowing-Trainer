@@ -280,6 +280,15 @@
     <Compile Include="Assets\Scripts\Training Scripts\Video_Playback.cs" />
     <Compile Include="Assets\Scripts\Training Scripts\look.cs" />
     <Compile Include="Assets\Scripts\VRIteractiveEventHandler.cs" />
+    <Compile Include="Assets\Scripts\Water Scripts\BoatPhysics.cs" />
+    <Compile Include="Assets\Scripts\Water Scripts\EndlessWaterSquare.cs" />
+    <Compile Include="Assets\Scripts\Water Scripts\FlyCam.cs" />
+    <Compile Include="Assets\Scripts\Water Scripts\GenerateExtraBoatMeshes.cs" />
+    <Compile Include="Assets\Scripts\Water Scripts\ModifyBoatMesh.cs" />
+    <Compile Include="Assets\Scripts\Water Scripts\TriangleData.cs" />
+    <Compile Include="Assets\Scripts\Water Scripts\WaterController.cs" />
+    <Compile Include="Assets\Scripts\Water Scripts\WaterSquare.cs" />
+    <Compile Include="Assets\Scripts\Water Scripts\WaveTypes.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_LaserPointer.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_Teleporter.cs" />
