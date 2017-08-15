@@ -26,11 +26,11 @@ namespace VRStandardAssets.Utils {
 		// The below functions are called by the VREyeRaycaster when the appropriate input is detected.
 		// They in turn call the appropriate events should they have subscribers.
 		public void Over() {
-			
+			Debug.Log("Over ");
 			m_IsOver = true;
 
 			if (OnOver != null) {
-				Debug.Log("Over ");
+				
 				OnOver();
 			}
 		}

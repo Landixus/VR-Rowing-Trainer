@@ -65,7 +65,7 @@ namespace VRStandardAssets.Utils {
 			if (Physics.Raycast(ray, out hit, m_RayLength, ~m_ExclusionLayers)) {
 				VRInteractiveItem interactible = hit.collider.GetComponent<VRInteractiveItem>(); //attempt to get the VRInteractiveItem on the hit object
 				m_CurrentInteractible = interactible;
-				
+				Debug.Log("Hit " + m_CurrentInteractible);
 
 				// If we hit an interactive item and it's not the same as the last interactive item, then call Over
 				if (interactible && interactible != m_LastInteractible)

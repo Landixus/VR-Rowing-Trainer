@@ -40,37 +40,21 @@ public class MenuInput : MonoBehaviour {
 		RaycastHit hit;
 		Debug.DrawRay(ray.origin, ray.direction * 5, Color.red);
 		if (Physics.Raycast(ray.origin, ray.direction, out hit, 10f)) {
-			if (!buttonSelected) {
+			if (!buttonSelected && hit.transform.tag == "Button") {
 				buttonSelected = true;
-				if (hit.transform.tag == "Button") {
-					selectedButton = hit.transform.GetComponent<Button>();
-					selectedButton.Select();
-
-				}
-			}
-		} else {
-			if (buttonSelected) {
+				selectedButton = hit.transform.GetComponent<Button>();
+				selectedButton.Select();
+			} else if (buttonSelected && hit.transform.tag != "Button") {
 				eventSystem.SetSelectedGameObject(null);
 				buttonSelected = false;
 			}
+		} else if (buttonSelected) {
+				eventSystem.SetSelectedGameObject(null);
+				buttonSelected = false;
 		}
 
 		if (buttonSelected && Input.GetMouseButtonDown(0)) {
 			selectedButton.onClick.Invoke();
-		}
-
-
-		if (Input.GetAxisRaw("Vertical") != 0 && buttonSelected == false) {
-			eventSystem.SetSelectedGameObject(selectedObject);
-			buttonSelected = true;
-		}
-		//Debug.Log("Is the mouse present " + Input.mousePresent);
-		//Debug.Log("Mouse button down " + Input.GetMouseButtonDown(0));
-		if (eventSystem.IsPointerOverGameObject()) {
-			pointerOver = true;
-			Debug.Log("Pointer over " + pointerOver);
-		} else {
-			pointerOver = false;
 		}
 	}
 	/*
