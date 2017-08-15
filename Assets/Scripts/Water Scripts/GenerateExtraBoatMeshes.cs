@@ -78,6 +78,8 @@ public class GenerateExtraBoatMeshes {
 	//Generate the foam skirt
 	//intersectionVertices are in global pos
 	public void GenerateFoamSkirt(Mesh mesh, string name, List<Vector3> intersectionVertices) {
+		/*
+		
 		//Step 1. Clean the vertices that are close together
 		List<Vector3> cleanedVertices = CleanVertices(intersectionVertices);
 
@@ -103,6 +105,8 @@ public class GenerateExtraBoatMeshes {
 
 		//Step 4. Create the foam mesh
 		CreateFoamMesh(finalVertices, mesh, name);
+
+	*/
 	}
 
 	//Clean vertices that are close together
