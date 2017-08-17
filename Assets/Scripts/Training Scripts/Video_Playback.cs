@@ -11,17 +11,17 @@ using UnityEngine.Video;
 using UnityEngine.UI;
 
 public class Video_Playback : MonoBehaviour {
-    public double boat_speed; //speed of the boat
-    public const double video_speed = 0.875; //speed the video was recorded at in m/s
-    public  double normalise_multiplier; //video playback speed at 1m/s
+	private double boat_speed; //speed of the boat
+    private const double video_speed = 0.875; //speed the video was recorded at in m/s
+	private double normalise_multiplier; //video playback speed at 1m/s
     public double video_playback; //the video playback speed to match the boat speed
     public VideoPlayer video; //video object
 	public Text SpeedDisplay; //text object to display speed
     private Pace_Boat pb; //pace boat object
 	private PM5_Communication pm_com; //used to get data from erg
 
-    public float framerate; //rate to refresh video playback speed
-    public float deltatime; //time since last refresh
+    private float framerate; //rate to refresh video playback speed
+	private float deltatime; //time since last refresh
 
     public double minSpeed; //speed at which the player needs to speed up
     public double maxSpeed; //speed at which the player needs to slow down
@@ -30,14 +30,27 @@ public class Video_Playback : MonoBehaviour {
     private float lastPlayed; //time since audio was last played
     private Color green;
     private Color red;
+	public bool playerstarted;
 
 	private void Awake() {
-		video = GameObject.Find("VideoSphere").GetComponent<VideoPlayer>();
+		Debug.Log("Video awake");
+		//video.Prepare();
+		//video.frame = 1;
+		//video = GameObject.Find("SceneController").GetComponent<Video_Playback>().video;
 		pm_com = GameObject.Find("SceneController").GetComponent<PM5_Communication>();
 		boat_speed = pm_com.current_Speed;
+		playerstarted = false;
+		//video.Play();
+		//refreshVideoSpeed();
+		/*
 		if (video.isPrepared) {
+			Debug.Log("Video is prepared");
 			refreshVideoSpeed();
+		} 
+		else {
+			Debug.Log("Video is not prepared");
 		}
+		*/
 	}
 
 	// Use this for initialization
@@ -56,6 +69,10 @@ public class Video_Playback : MonoBehaviour {
 	void Update () {
         deltatime += Time.deltaTime;
 		boat_speed = pm_com.current_Speed;
+		if (boat_speed > 0) {
+			playerstarted = true;
+			Debug.Log("Player Started");
+		}
 		// Debug.Log("deltatime:" + deltatime);
 		refreshVideoSpeed();
         if (video_playback > pb.pbspeed)
@@ -85,7 +102,7 @@ public class Video_Playback : MonoBehaviour {
 
 	// Used to update the speed of the environment
     public void refreshVideoSpeed() {
-        video_playback = boat_speed * normalise_multiplier;
+        video_playback = boat_speed * normalise_multiplier + 0.5;
         video.playbackSpeed = (float) video_playback;
         //Debug.Log("boat speed:" + boat_speed);
         //Debug.Log("video playback speed:" + video_playback);

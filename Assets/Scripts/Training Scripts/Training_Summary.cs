@@ -28,11 +28,11 @@ public class Training_Summary : MonoBehaviour {
     private float deltatime; //time since last refresh
 
     public GameObject Summary;
-	private Text TimeText;
-	private Text AverageSplitsText;
-	private Text AverageStrokesText;
-	private Text AverageSpeedText;
-	private Text AveragePowerText;
+	public Text TimeText;
+	public Text AverageSplitsText;
+	public Text AverageStrokesText;
+	public Text AverageSpeedText;
+	public Text AveragePowerText;
 
 	// Use this for initialization
 	void Start () {
@@ -47,11 +47,11 @@ public class Training_Summary : MonoBehaviour {
         deltatime = 0.0f;
 
 		//text objects for displaying the values to the user
-		TimeText = GameObject.Find("TimeText").GetComponent<Text>();
-		AverageSplitsText = GameObject.Find("AverageSplitsText").GetComponent<Text>();
-		AverageStrokesText = GameObject.Find("AverageStrokesText").GetComponent<Text>();
-		AverageSpeedText = GameObject.Find("AverageSpeedText").GetComponent<Text>();
-		AveragePowerText = GameObject.Find("AveragePowerText").GetComponent<Text>();
+		//AverageSplitsText = GameObject.Find("AverageSplitsText").GetComponent<Text>();
+		//AverageStrokesText = GameObject.Find("AverageStrokesText").GetComponent<Text>();
+		//AverageSpeedText = GameObject.Find("AverageSpeedText").GetComponent<Text>();
+		//AveragePowerText = GameObject.Find("AveragePowerText").GetComponent<Text>();
+		//TimeText = GameObject.Find("TimeText").GetComponent<Text>();
 	}
 	
 	// Update is called once per frame
