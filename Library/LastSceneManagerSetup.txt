@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/Free Session.unity
+=======
+- path: Assets/Scenes/endless_ocean.unity
+>>>>>>> master
   isLoaded: 1
   isActive: 1
