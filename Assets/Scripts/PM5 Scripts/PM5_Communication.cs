@@ -18,11 +18,14 @@ using PTR_T = System.UIntPtr;
 
 public class PM5_Communication : MonoBehaviour {
 
-	public double current_Speed = 0;
-	public double set_Speed; // Used to set a manual speed for testing purposes
-	// Counter controls how often current_Speed is changed
-	// Timeout senses the rower hasn't rowed so speed can be set to 0
-	private static UINT32_T counter = 1, last_Distance = 0, timeout = 0;
+	public double current_Speed, current_Power, current_MinPer500m;
+	public UINT32_T current_Time, current_Distance, current_Cadence;
+	
+	// Variables for speed calculation and idle sensing
+	private static UINT32_T last_Distance = 0, last_Time = 0;
+	private static LinkedList <double> speed_List = new LinkedList<double>();
+	private static LinkedList<double> power_List = new LinkedList<double>();
+	public int idle_Counter;
 
 	// Import of all dll functions required for communication with PM device
 	[DllImport("PM3DDICP.dll")]
@@ -40,19 +43,18 @@ public class PM5_Communication : MonoBehaviour {
 
 	// Use this for initialization
 	void Start() {
-
 		Initialize();
-
+		for (int i = 1; i <= 5; i++) {
+			speed_List.AddFirst(0.0);
+		}
+		for (int i = 1; i <= 2; i++) {
+			power_List.AddFirst(0.0);
+		}
 	}
 
 	// Update is called once per frame
 	void Update() {
-		if (set_Speed != 0) {
-			current_Speed = set_Speed;
-		} else {
-			Get_Speed();
-			timeout++; 
-		}
+		Get_Speed();
 	}
 
 	// Initialize communication protocols with the Concept2 device
@@ -61,12 +63,10 @@ public class PM5_Communication : MonoBehaviour {
 		ERRCODE_T error = 1;
 		error = tkcmdsetDDI_init();
 		Handle_error(error, "tkcmdsetDDI_init");
-
-		// Timeout set to 1000ms
+		
 		error = 1;
-		error = tkcmdsetCSAFE_init_protocol(1000);
+		error = tkcmdsetCSAFE_init_protocol(1000);			// Timeout set to 1000ms
 		Handle_error(error, "tkcmdsetCSAFE_init_protocol");
-
 		Device_counter();
 
 		return;
@@ -83,7 +83,6 @@ public class PM5_Communication : MonoBehaviour {
 	// Detects the number of devices connected
 	// Note: Currently only looks for PM5 devices but can be rewritten to search for other PM Models
 	private static void Device_counter() {
-
 		string product_name_str = "Concept2 Performance Monitor 5 (PM5)";
 		byte[] product_name_ptr = System.Text.Encoding.UTF8.GetBytes(product_name_str);
 		UINT16_T address = 0;
@@ -117,29 +116,77 @@ public class PM5_Communication : MonoBehaviour {
 		PTR_T rsp_data_size = (PTR_T)rsp_data_size_val;
 		ERRCODE_T error = 1;
 		error = tkcmdsetCSAFE_command(unit_address, cmd_data_size, cmd_data, ref rsp_data_size, rsp_data);
-		Handle_error(error, "tkcmdsetCSAFE_command: CSAFE_PM_GET_WORKTIME");
+		Handle_error(error, "tkcmdsetCSAFE_command: CSAFE_PM_GET_WORKDISTANCE");
 		return rsp_data[2];
 	}
 
-	// Calculates the current change of speed of the rower for every interval.
+	// Requests the current power from the PM device - CSAFE_GETPOWER_CMD = 0xB4
+	private static UINT32_T Get_Power() {
+		UINT16_T unit_address = 0, cmd_data_size = 1;
+		UINT32_T[] cmd_data = new UINT32_T[] { 0xB4, 0, 0 }, rsp_data = new UINT32_T[] { 0, 0, 0 };
+		UINT16_T rsp_data_size_val = 64;
+		PTR_T rsp_data_size = (PTR_T)rsp_data_size_val;
+		ERRCODE_T error = 1;
+		error = tkcmdsetCSAFE_command(unit_address, cmd_data_size, cmd_data, ref rsp_data_size, rsp_data);
+		Handle_error(error, "tkcmdsetCSAFE_command: CSAFE_GETPOWER_CMD");
+		return rsp_data[2];
+	}
+
+	// Requests the current cadence from the PM device - CSAFE_GETCADENCE_CMD = 0xA7
+	private static UINT32_T Get_Cadence() {
+		UINT16_T unit_address = 0, cmd_data_size = 1;
+		UINT32_T[] cmd_data = new UINT32_T[] { 0xA7, 0, 0 }, rsp_data = new UINT32_T[] { 0, 0, 0 };
+		UINT16_T rsp_data_size_val = 64;
+		PTR_T rsp_data_size = (PTR_T)rsp_data_size_val;
+		ERRCODE_T error = 1;
+		error = tkcmdsetCSAFE_command(unit_address, cmd_data_size, cmd_data, ref rsp_data_size, rsp_data);
+		Handle_error(error, "tkcmdsetCSAFE_command: CSAFE_GETCADENCE_CMD");
+		return rsp_data[2];
+	}
+
+	// Calculates the current change of speed of the rower once per second.
+	// Averages out the last 5 readings in order to eliminate fluctuation.
 	private void Get_Speed() {
-		UINT32_T time = Get_Time();
-		UINT32_T current_Distance = Get_Distance();
-		if (counter <= time) {
-			current_Speed = ((double)current_Distance - (double)last_Distance) / 2;
+		current_Time = Get_Time();
+		current_Distance = Get_Distance();
+		double new_Speed, speed_Total = 0;
+		if ((current_Time - last_Time) > 0) {
+			new_Speed = ((double)current_Distance - (double)last_Distance) / (current_Time - last_Time);
 			last_Distance = current_Distance;
-			counter += 2; // This can be used to change speed every 'n' seconds
-			timeout = 0;
-			Debug.Log("Speed (m/s): " + current_Speed);
+			last_Time = current_Time;
+			speed_List.AddFirst(new_Speed);
+			speed_List.RemoveLast();
+			foreach (var speed in speed_List) {
+				speed_Total += speed;
+			}
+			current_Speed = speed_Total / speed_List.Count;
+			Session_Stats();
+			Debug.Log("Speed (m/s): " + current_Speed.ToString("N3"));
+			idle_Counter = 0;
 		} else {
-			if (timeout >= 100) {
-				if (current_Speed != 0) {
-					current_Speed = 0;
-					Debug.Log("Speed (m/s): " + current_Speed + " Rower stopped?");
+			idle_Counter++;
+			if (idle_Counter >= 200) {						// 200 update cycles to register no rowing has been done
+				speed_List.AddFirst(0.0);
+				speed_List.RemoveLast();
+				foreach (var speed in speed_List) {
+					speed_Total += speed;
 				}
-			} 
+				current_Speed = speed_Total / 5;
+				idle_Counter = 0;
+				if (current_Speed == 0) {
+					Debug.Log("Rower has stopped.");
+				} else {
+					Debug.Log("Rowing stopping. Speed (m/s): " + current_Speed.ToString("N3"));
+				}
+			}
 		}
 		return;
 	}
 
+	// Added session statistics for summary calculations
+	private void Session_Stats() {
+		current_Power = Get_Power();
+		current_MinPer500m = (500 / current_Speed) / 60;	// In minutes
+		current_Cadence = Get_Cadence();
+	}
 }
