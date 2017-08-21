@@ -119,13 +119,13 @@ public class Video_Playback : MonoBehaviour {
     {
        if (convertSpeed() < minSpeed)
         {
-			//Debug.Log("Speed up");
+			Debug.Log("Speed up");
             GetComponent<AudioSource>().PlayOneShot(speedUp);
             lastPlayed = 0;
         }
        if (convertSpeed() > maxSpeed)
         {
-			//Debug.Log("Slow Down");
+			Debug.Log("Slow Down");
 			GetComponent<AudioSource>().PlayOneShot(slowDown);
             lastPlayed = 0;
         }

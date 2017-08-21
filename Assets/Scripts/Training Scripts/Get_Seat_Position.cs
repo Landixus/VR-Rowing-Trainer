@@ -19,7 +19,8 @@ public class Get_Seat_Position : MonoBehaviour {
     public void seatPos()
     {
         sp.position = controller.transform.position;
-        sp.rotation = Quaternion.Euler(new Vector3(0, 270, 0));
+		//sp.rotation = controller.transform.rotation;
+		sp.rotation = Quaternion.Euler(new Vector3(0, 270, 0));
 		Debug.Log("controller position:" + sp.position);
 		Debug.Log("controller rotation:" + sp.rotation);
 		//reposition = true;

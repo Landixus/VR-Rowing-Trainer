@@ -22,7 +22,7 @@ public class Training_Summary : MonoBehaviour {
     public double splitTime; //current split time
 
 	public double distance; //distance the user has travelled
-	private const double length = 50; //length of the training session
+	private const double length = 100; //length of the training session
 	private int count = 1;
 	private bool finished = false;
 	private float datarate; //rate to refresh video playback speed
@@ -84,19 +84,19 @@ public class Training_Summary : MonoBehaviour {
 		splitTime = splitTime + Time.deltaTime;
         if (distance > splitDistance*count && split[count - 1] == 0 && count < 4)
         {
-			Debug.Log("Adding Split" + distance);
+			//Debug.Log("Adding Split" + distance);
 			split[count - 1] = splitTime;
 			splitTime = 0;
 			count++;
-			Debug.Log("count = " + count);
-			Debug.Log("SplitDistance: " + splitDistance * count);
+			//Debug.Log("count = " + count);
+			//Debug.Log("SplitDistance: " + splitDistance * count);
 		}
 			   
         //check if the end has been reached
 		if (distance > length && !finished) 
         {
 			finished = true;
-			Debug.Log("Adding last Split");
+			//Debug.Log("Adding last Split");
 			split[count-1] = splitTime;
             displaySummary();
 		}
@@ -121,13 +121,13 @@ public class Training_Summary : MonoBehaviour {
 			count++;
 		}
 		avg = avg / count;
-		Debug.Log(avg);
+		//Debug.Log(avg);
 		return avg;
 	}
 
 	// Used to calculate and display the training summary
 	public void displaySummary() {
-		Debug.Log("Displaying summary");
+		//Debug.Log("Displaying summary");
 		avgPower = GetAverage(power);
 		avgStrokes_pm = GetAverage(strokes_pm);
 		avgSpeed = GetAverage(speed);
@@ -145,7 +145,7 @@ public class Training_Summary : MonoBehaviour {
 		AverageStrokesText.text = "AverageStrokes: " + avgStrokes_pm;
 		AverageSpeedText.text = "AverageSpeed: " + avgSpeed;
 		AveragePowerText.text = "AveragePower: " + avgPower;
-
+		vb.SpeedDisplay.enabled = false;
 		Summary.SetActive(true);
 	}
 }
