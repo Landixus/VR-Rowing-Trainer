@@ -6,10 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using VRStandardAssets.Utils;
-<<<<<<< HEAD
 
-=======
->>>>>>> master
 
 public class MenuInput : MonoBehaviour {
 
@@ -18,7 +15,6 @@ public class MenuInput : MonoBehaviour {
 	private double selectTimer;
 	private bool buttonSelected;
 
-<<<<<<< HEAD
 	private VRInteractiveItem interactiveItem;
 	public VREyeRaycaster eyeRaycaster;
 
@@ -31,41 +27,11 @@ public class MenuInput : MonoBehaviour {
 	}
 
 	public void rayHit() {
-=======
-	//private StandaloneInputModule sim;
-    private bool buttonSelected;
-
-	private VRInteractiveItem interactiveItem;
-	//public UnityEvent GazeEnterEvent;
-	//public UnityEvent GazeExitEvent;
-
-	private void Start() 
-	{
-		
-		interactiveItem = GetComponent<VRInteractiveItem>();
-		interactiveItem.OnOver += onGazeEnter;
-		interactiveItem.OnOver += onGazeExit;
-		//sim = eventSystem.GetComponent<StandaloneInputModule>();
-		//Debug.Log(sim.input);
-}
-	
-	void Update()
-    {
-		rayHit();
-	}
-
-	public void rayHit() 
-	{
->>>>>>> master
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
 		Debug.DrawRay(ray.origin, ray.direction * 5, Color.red);
 		if (Physics.Raycast(ray.origin, ray.direction, out hit, 10f)) {
-<<<<<<< HEAD
 			if (!buttonSelected && hit.transform.tag == "Button") {
-=======
-			if (!buttonSelected) {
->>>>>>> master
 				buttonSelected = true;
 				selectedButton = hit.transform.GetComponent<Button>();
 				selectedButton.Select();
@@ -74,8 +40,8 @@ public class MenuInput : MonoBehaviour {
 				buttonSelected = false;
 			}
 		} else if (buttonSelected) {
-				eventSystem.SetSelectedGameObject(null);
-				buttonSelected = false;
+			eventSystem.SetSelectedGameObject(null);
+			buttonSelected = false;
 		}
 
 		if (buttonSelected && Input.GetMouseButtonDown(0)) {
@@ -87,7 +53,7 @@ public class MenuInput : MonoBehaviour {
 		interactiveItem = eyeRaycaster.CurrentInteractible;
 		Debug.Log("Gaze Enter " + interactiveItem.GetComponent<Button>());
 		if (!buttonSelected && interactiveItem.tag == "Button") {
-			
+
 			buttonSelected = true;
 			selectedButton = interactiveItem.GetComponent<Button>();
 			selectedButton.Select();
@@ -97,7 +63,6 @@ public class MenuInput : MonoBehaviour {
 		}
 	}
 
-<<<<<<< HEAD
 	public void ExitGaze() {
 		Debug.Log("Gaze Exit " + interactiveItem.GetComponent<Button>());
 		if (buttonSelected) {
@@ -126,47 +91,5 @@ public class MenuInput : MonoBehaviour {
 	public void onDisable() {
 		buttonSelected = false;
 	}
-	
-=======
-		if (Input.GetAxisRaw("Vertical") != 0 && buttonSelected == false) {
-			eventSystem.SetSelectedGameObject(selectedObject);
-			buttonSelected = true;
-		}
-		//Debug.Log("Is the mouse present " + Input.mousePresent);
-		//Debug.Log("Mouse button down " + Input.GetMouseButtonDown(0));
-		if (eventSystem.IsPointerOverGameObject()) {
-			pointerOver = true;
-			Debug.Log("Pointer over " + pointerOver);
-		} else {
-			pointerOver = false;
-		}
-	}
 
-	void onGazeEnter() {
-		//GazeEnterEvent.Invoke();
-		Debug.Log("Gaze Enter");
-		if (!buttonSelected) {
-			buttonSelected = true;
-			if (interactiveItem.tag == "Button") {
-				selectedButton = interactiveItem.GetComponent<Button>();
-				selectedButton.Select();
-
-			}
-		}
-	}
-
-	void onGazeExit() {
-		Debug.Log("Gaze Exit");
-		//GazeExitEvent.Invoke();
-		if (buttonSelected) {
-			eventSystem.SetSelectedGameObject(null);
-			buttonSelected = false;
-		}
-	}
-
-	public void onDisable()
-    {
-        buttonSelected = false;
-    }
->>>>>>> master
 }

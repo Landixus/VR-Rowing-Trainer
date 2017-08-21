@@ -69,21 +69,21 @@ public class Video_Playback : MonoBehaviour {
 	void Update () {
         deltatime += Time.deltaTime;
 		boat_speed = pm_com.current_Speed;
-		if (boat_speed > 0) {
+		if (!playerstarted && boat_speed > 0) {
 			playerstarted = true;
-			Debug.Log("Player Started");
+			//Debug.Log("Player Started");
 		}
 		// Debug.Log("deltatime:" + deltatime);
 		refreshVideoSpeed();
         if (video_playback > pb.pbspeed)
         {
             SpeedDisplay.color = green;
-			Debug.Log("Colour green");
+			//Debug.Log("Colour green");
         }
         else
         {
             SpeedDisplay.color = red;
-			Debug.Log("Colour red");
+			//Debug.Log("Colour red");
 		}
         SpeedDisplay.text = convertSpeed().ToString() + "km/h";
         lastPlayed += Time.deltaTime;
@@ -119,13 +119,13 @@ public class Video_Playback : MonoBehaviour {
     {
        if (convertSpeed() < minSpeed)
         {
-			Debug.Log("Speed up");
+			//Debug.Log("Speed up");
             GetComponent<AudioSource>().PlayOneShot(speedUp);
             lastPlayed = 0;
         }
        if (convertSpeed() > maxSpeed)
         {
-			Debug.Log("Slow Down");
+			//Debug.Log("Slow Down");
 			GetComponent<AudioSource>().PlayOneShot(slowDown);
             lastPlayed = 0;
         }

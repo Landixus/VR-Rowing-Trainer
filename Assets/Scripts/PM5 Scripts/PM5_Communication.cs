@@ -161,7 +161,7 @@ public class PM5_Communication : MonoBehaviour {
 			}
 			current_Speed = speed_Total / speed_List.Count;
 			Session_Stats();
-			Debug.Log("Speed (m/s): " + current_Speed.ToString("N3"));
+			//Debug.Log("Speed (m/s): " + current_Speed.ToString("N3"));
 			idle_Counter = 0;
 		} else {
 			idle_Counter++;
