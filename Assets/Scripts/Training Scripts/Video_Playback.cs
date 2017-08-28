@@ -71,6 +71,7 @@ public class Video_Playback : MonoBehaviour {
 		boat_speed = pm_com.current_Speed;
 		if (!playerstarted && boat_speed > 0) {
 			playerstarted = true;
+			GameObject.Find("pacing_boat").GetComponent<Animation>().Play();
 			//Debug.Log("Player Started");
 		}
 		// Debug.Log("deltatime:" + deltatime);

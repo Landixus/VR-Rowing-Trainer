@@ -274,6 +274,8 @@
     <Compile Include="Assets\Scripts\Menu Scripts\VRIteractiveEventHandler.cs" />
     <Compile Include="Assets\Scripts\PM5 Scripts\PM5_Communication.cs" />
     <Compile Include="Assets\Scripts\Training Scripts\FPS.cs" />
+    <Compile Include="Assets\Scripts\Training Scripts\Free_Training_Summary.cs" />
+    <Compile Include="Assets\Scripts\Training Scripts\Free_Video_Playback.cs" />
     <Compile Include="Assets\Scripts\Training Scripts\Get_Seat_Position.cs" />
     <Compile Include="Assets\Scripts\Training Scripts\Pace_Boat.cs" />
     <Compile Include="Assets\Scripts\Training Scripts\Rowing_Speed.cs" />
