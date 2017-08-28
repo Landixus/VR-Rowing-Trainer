@@ -22,7 +22,6 @@ public class Pace_Boat : MonoBehaviour {
 
 	// Use this for initialization
 	void Start() {
-		pbspeed = 2;
 		vb = GetComponent<Video_Playback>();
 	}
 
