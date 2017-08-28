@@ -14,77 +14,59 @@ public class MenuInput : MonoBehaviour {
 	private Button selectedButton;
 	private double selectTimer;
 	private bool buttonSelected;
+	private bool startTimer;
+	private bool timeElapsed;
+	private float startTime;
+	private AudioSource audioSource;
+	public AudioClip menuClick;
+
 
 	private VRInteractiveItem interactiveItem;
 	public VREyeRaycaster eyeRaycaster;
 
 	private void Start() {
-		selectTimer = 0.0;
+		startTimer = false;
+		timeElapsed = false;
+		audioSource = GameObject.Find("Audio").GetComponent<AudioSource>();
 	}
 
-	void Update() {
-		rayHit();
-	}
-
-	public void rayHit() {
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		RaycastHit hit;
-		Debug.DrawRay(ray.origin, ray.direction * 5, Color.red);
-		if (Physics.Raycast(ray.origin, ray.direction, out hit, 10f)) {
-			if (!buttonSelected && hit.transform.tag == "Button") {
-				buttonSelected = true;
-				selectedButton = hit.transform.GetComponent<Button>();
-				selectedButton.Select();
-			} else if (buttonSelected && hit.transform.tag != "Button") {
-				eventSystem.SetSelectedGameObject(null);
-				buttonSelected = false;
+	private void Update() {
+		if (startTimer) {
+			timeElapsed = false;
+			if (Time.time - startTime > 2.0f) {
+				timeElapsed = true;
+				Debug.Log("End time: " + Time.time);
 			}
-		} else if (buttonSelected) {
-			eventSystem.SetSelectedGameObject(null);
-			buttonSelected = false;
-		}
-
-		if (buttonSelected && Input.GetMouseButtonDown(0)) {
-			selectedButton.onClick.Invoke();
+			if (timeElapsed) {
+				audioSource.PlayOneShot(menuClick);
+				selectedButton.onClick.Invoke();
+				Debug.Log("time elapsed");
+				startTimer = false;
+			}
 		}
 	}
 
 	public void EnterGaze() {
 		interactiveItem = eyeRaycaster.CurrentInteractible;
-		Debug.Log("Gaze Enter " + interactiveItem.GetComponent<Button>());
+		//Debug.Log("Gaze Enter " + interactiveItem.GetComponent<Button>());
 		if (!buttonSelected && interactiveItem.tag == "Button") {
 
 			buttonSelected = true;
 			selectedButton = interactiveItem.GetComponent<Button>();
 			selectedButton.Select();
-			Debug.Log(interactiveItem.name + " selected");
-			//click timer creates crash
-			//clickTimer();
+			//Debug.Log(interactiveItem.name + " selected");
+			startTimer = true;
+			startTime = Time.time;
+			Debug.Log("Start time: " + startTime + "button: " + interactiveItem.GetComponent<Button>());
 		}
 	}
 
 	public void ExitGaze() {
-		Debug.Log("Gaze Exit " + interactiveItem.GetComponent<Button>());
+		//Debug.Log("Gaze Exit " + interactiveItem.GetComponent<Button>());
 		if (buttonSelected) {
 			eventSystem.SetSelectedGameObject(null);
 			buttonSelected = false;
-		}
-	}
-
-	public void clickTimer() {
-		float startTime = Time.time;
-		Debug.Log("Start time: " + startTime);
-		bool timeElapsed = true;
-
-		while (Time.time - startTime < 3.0f) {
-			if (!buttonSelected) {
-				timeElapsed = false;
-			}
-		}
-		Debug.Log("End time: " + Time.time);
-		if (timeElapsed) {
-			//selectedButton.onClick.Invoke();
-			Debug.Log("time elapsed");
+			startTimer = false;
 		}
 	}
 

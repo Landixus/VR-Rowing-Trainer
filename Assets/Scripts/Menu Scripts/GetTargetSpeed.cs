@@ -11,7 +11,7 @@ public class GetTargetSpeed : MonoBehaviour {
     public void TargetSpeed()
     {
         SliderValue = GameObject.Find("TargetSpeedSlider").GetComponent<Slider>().value;
-        Debug.Log(SliderValue);
+        //Debug.Log(SliderValue);
         ValueText.text = "Target Speed: " + SliderValue.ToString();
     }
 }
