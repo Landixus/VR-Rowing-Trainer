@@ -84,6 +84,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Position_Scene.cs" />
     <Compile Include="Assets\Scripts\Menu Scripts\AccountManager.cs" />
     <Compile Include="Assets\Scripts\Menu Scripts\DontDestroy.cs" />
     <Compile Include="Assets\Scripts\Menu Scripts\GetTargetSpeed.cs" />

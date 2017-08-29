@@ -40,7 +40,7 @@ public class Pace_Boat : MonoBehaviour {
 	}
 
 	public void Move_Pace_Boat() {
-		if (pb.position.z < 10 && pb.position.z > -10) {
+		if (pb.position.z < 20 && pb.position.z > -20) {
 			pb.position += Vector3.forward * deltaspeed * Time.deltaTime;
 		} else {
 			pb.position += Vector3.back * deltaspeed * Time.deltaTime;

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Get_Seat_Position : MonoBehaviour {
     public SteamVR_TrackedController controller; //controller object
-    private Transform sp; //seat position and rotation
+    public Transform sp; //seat position and rotation
     public bool reposition; //tracks if the position has been changed
 
 	// Use this for initialization
 	void Start () {
 		//controller = GameObject.Find("Controller(right)").GetComponent<SteamVR_TrackedController>();
         controller.TriggerClicked += Trigger;
-		sp = GameObject.Find("PlayerPos").GetComponent<Transform>();
+		//sp = GameObject.Find("PlayerPos").GetComponent<Transform>();
 		reposition = false;
 	}
 
@@ -20,9 +20,9 @@ public class Get_Seat_Position : MonoBehaviour {
     {
         sp.position = controller.transform.position;
 		//sp.rotation = controller.transform.rotation;
-		sp.rotation = Quaternion.Euler(new Vector3(0, 270, 0));
-		Debug.Log("controller position:" + sp.position);
-		Debug.Log("controller rotation:" + sp.rotation);
+		sp.rotation = Quaternion.Euler(new Vector3(0, controller.transform.rotation.eulerAngles.y, 0));
+		//Debug.Log("controller position:" + sp.position);
+		//Debug.Log("controller rotation:" + sp.rotation);
 		//reposition = true;
         //controller.enabled = false;
     }
