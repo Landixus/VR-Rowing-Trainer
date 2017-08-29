@@ -28,7 +28,7 @@ public class Training_Summary : MonoBehaviour {
 	private float datarate; //rate to refresh video playback speed
     private float deltatime; //time since last refresh
 
-	public Video_Playback vb;
+	private Video_Playback vb;
 
 
 	private PM5_Communication pm_com; //used to get data from erg
@@ -41,7 +41,8 @@ public class Training_Summary : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		pm_com = GameObject.Find("SceneController").GetComponent<PM5_Communication>();
+		pm_com = GetComponent<PM5_Communication>();
+		vb = GetComponent<Video_Playback>();
 		power = new List<double>();
         strokes_pm = new List<double>();
         speed = new List<double>();

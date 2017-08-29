@@ -33,17 +33,25 @@ public class Video_Playback : MonoBehaviour {
 	public bool playerstarted;
 	private AudioSource audioSource;
 
+	private bool freeSession;
+
 	private void Awake() {
 		Debug.Log("Video awake");
-		pm_com = GameObject.Find("SceneController").GetComponent<PM5_Communication>();
+		pm_com = GetComponent<PM5_Communication>();
 		boat_speed = pm_com.current_Speed;
 		playerstarted = false;
 	}
 
 	// Use this for initialization
 	void Start () {
-        
-        pb = GameObject.Find("SceneController").GetComponent<Pace_Boat>();
+		freeSession = false;
+		if (GetComponent<Pace_Boat>() != null) {
+			pb = GetComponent<Pace_Boat>();
+		} else {
+			freeSession = true;
+			Debug.Log("Free Session");
+		}
+
 		normalise_multiplier = 1 / video_speed;
         lastPlayed = 0;
         green = new Color32(0x00, 0xFF, 0x4C, 0xFF);
@@ -58,33 +66,31 @@ public class Video_Playback : MonoBehaviour {
 		boat_speed = pm_com.current_Speed;
 		if (!playerstarted && boat_speed > 0) {
 			playerstarted = true;
-			GameObject.Find("pacing_boat").GetComponent<Animation>().Play();
+			if (!freeSession) {
+				GameObject.Find("pacing_boat").GetComponent<Animation>().Play();
+			}
 			//Debug.Log("Player Started");
 		}
 		// Debug.Log("deltatime:" + deltatime);
 		RefreshVideoSpeed();
-        if (video_playback > pb.pbspeed)
-        {
-            SpeedDisplay.color = green;
-			//Debug.Log("Colour green");
-        }
-        else
-        {
-            SpeedDisplay.color = red;
-			//Debug.Log("Colour red");
+		
+		if (!freeSession) {
+			if (video_playback > pb.pbspeed) {
+				SpeedDisplay.color = green;
+			} else {
+				SpeedDisplay.color = red;
+			}
+			lastPlayed += Time.deltaTime;
+			if (lastPlayed > 5 && playerstarted) {
+				AudioController();
+			}
 		}
         SpeedDisplay.text = ConvertSpeed().ToString() + "km/h";
-        lastPlayed += Time.deltaTime;
-		//Debug.Log(lastPlayed);
-        if (lastPlayed > 5)
-        {
-            AudioController();
-        }
 	}
 
 	// Used to update the speed of the environment
     public void RefreshVideoSpeed() {
-        video_playback = boat_speed * normalise_multiplier + 0.5;
+        video_playback = boat_speed * normalise_multiplier;
         video.playbackSpeed = (float) video_playback;
         //Debug.Log("boat speed:" + boat_speed);
         //Debug.Log("video playback speed:" + video_playback);
