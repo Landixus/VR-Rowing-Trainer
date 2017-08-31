@@ -30,7 +30,7 @@ public struct TriangleData{
         this.center = (p1 + p2 + p3) / 3f;
 
         //Distance to the surface from the center of the triangle
-        this.distanceToSurface = Mathf.Abs(WaterController.current.DistanceToWater(this.center, Time.time));
+        this.distanceToSurface = Mathf.Abs(WaterController.current.DistanceToWater(this.center));
 
         //Normal to the triangle
         this.normal = Vector3.Cross(p2 - p1, p3 - p1).normalized;

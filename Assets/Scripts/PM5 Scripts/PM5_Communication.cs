@@ -25,7 +25,7 @@ public class PM5_Communication : MonoBehaviour {
 	private static UINT32_T last_Distance = 0, last_Time = 0;
 	private static LinkedList <double> speed_List = new LinkedList<double>();
 	private static LinkedList<double> power_List = new LinkedList<double>();
-	public int idle_Counter;
+	private static int idle_Counter;
 
 	// Import of all dll functions required for communication with PM device
 	[DllImport("PM3DDICP.dll")]

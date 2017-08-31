@@ -6,44 +6,37 @@ public class WaterController : MonoBehaviour
 {
     public static WaterController current;
 
+	private Renderer rend;
+
     public bool isMoving;
 
-    //Wave height and speed
-    public float scale = 0.1f;
-    public float speed = 1.0f;
-    //The width between the waves
-    public float waveDistance = 1f;
-    //Noise parameters
-    public float noiseStrength = 1f;
-    public float noiseWalk = 1f;
+    //River ripple speed
+    public float speed = 0.5f;
 
     void Start()
     {
         current = this;
+		rend = GetComponent<Renderer>();
     }
 
-    //Get the y coordinate from whatever wavetype we are using
-    public float GetWaveYPos(Vector3 position, float timeSinceStart)
-    {
-        if (isMoving)
-        {
-        return WaveTypes.SinXWave(position, speed, scale, waveDistance, noiseStrength, noiseWalk, timeSinceStart);
-        }
-        else
-        {
-        return 0f;
-        }
+	void Update() {
+		float newOffset = speed * Time.time;
+		rend.material.SetTextureOffset("_MainTex", new Vector2(0.0f, newOffset));
+	}
 
-        //return 0f;
-    }
+	//Return the height of the water
+	public float GetWaveYPos()
+	{
+		return transform.position.y;
+	}
 
     //Find the distance from a vertice to water
     //Make sure the position is in global coordinates
     //Positive if above water
     //Negative if below water
-    public float DistanceToWater(Vector3 position, float timeSinceStart)
+    public float DistanceToWater(Vector3 position)
     {
-        float waterHeight = GetWaveYPos(position, timeSinceStart);
+		float waterHeight = GetWaveYPos();
 
         float distanceToWater = position.y - waterHeight;
 

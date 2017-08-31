@@ -21,9 +21,6 @@ public class ModifyBoatMesh {
     //A list of triangles from the submerged parts of the boat
     public List<TriangleData> underWaterTriangleData = new List<TriangleData>();
 
-	//A list with all vertices that are at the intersection point between the air and water
-	private List<Vector3> intersectionVertices = new List<Vector3>();
-
 	//Constructer for ModifyBoatMesh class
 	public ModifyBoatMesh(GameObject boatObj)
     {
@@ -54,7 +51,7 @@ public class ModifyBoatMesh {
 
             //Save the global position of each of the vertices
             boatVerticesGlobal[j] = globalPos;
-            allDistancesToWater[j] = WaterController.current.DistanceToWater(globalPos, Time.time);
+			allDistancesToWater[j] = WaterController.current.DistanceToWater(globalPos);
         }
 
         //Add the triangles that are below the water
@@ -177,8 +174,6 @@ public class ModifyBoatMesh {
 
         //The following saves the resulting data
         underWaterTriangleData.Add(new TriangleData(M, I_M, I_L));
-		intersectionVertices.Add(I_M);
-		intersectionVertices.Add(I_L);
 	}
 
     //Build the new triangles where two of the old vertices are above the water
@@ -245,8 +240,6 @@ public class ModifyBoatMesh {
 
         //Save the data
         underWaterTriangleData.Add(new TriangleData(L, J_H, J_M));
-		intersectionVertices.Add(J_H);
-		intersectionVertices.Add(J_M);
 	}
 
     //Help class to store triangle data so we can sort the distances

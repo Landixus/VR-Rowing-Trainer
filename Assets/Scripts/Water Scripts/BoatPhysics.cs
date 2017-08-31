@@ -18,17 +18,6 @@ public class BoatPhysics : MonoBehaviour {
     //This stores the density of the water that the boat is travelling on
     private float rhoWater = 1027f;
 
-	//For water reflection
-	public GameObject underWaterMirrorObj;
-	private Mesh underWaterMirrorMesh;
-
-	//The foam
-	public GameObject foamSkirtObj;
-	private Mesh foamMesh;
-
-	//Script that displays extra meshes, generate a mirrored mesh and a foam skirt
-	private GenerateExtraBoatMeshes generateExtraMeshes;
-
 	// Use this for initialization
 	void Start () {
         //Get the boat's rigidbody
@@ -37,13 +26,8 @@ public class BoatPhysics : MonoBehaviour {
         //Init the script that will modify the boat mesh
         modifyBoatMesh = new ModifyBoatMesh(gameObject);
 
-		generateExtraMeshes = new GenerateExtraBoatMeshes(gameObject);
-
 		//Meshes that are below and above the water
 		underWaterMesh = underWaterObj.GetComponent<MeshFilter>().mesh;
-
-		underWaterMirrorMesh = underWaterMirrorObj.GetComponent<MeshFilter>().mesh;
-		foamMesh = foamSkirtObj.GetComponent<MeshFilter>().mesh;
 	}
 	
 	// Update is called once per frame

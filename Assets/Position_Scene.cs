@@ -8,7 +8,7 @@ public class Position_Scene : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-		ppos = GameObject.Find("PlayerPos").transform;
+		ppos = GameObject.Find("ScenePos").transform;
 		scenepos.position = ppos.position;
 		scenepos.rotation = ppos.rotation;
 	}
