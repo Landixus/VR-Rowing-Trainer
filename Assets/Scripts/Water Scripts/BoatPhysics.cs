@@ -36,7 +36,7 @@ public class BoatPhysics : MonoBehaviour {
         modifyBoatMesh.GenerateUnderwaterMesh();
 
         //Display the under water mesh
-        modifyBoatMesh.DisplayMesh(underWaterMesh, "UnderWater Mesh", modifyBoatMesh.underWaterTriangleData);
+        //modifyBoatMesh.DisplayMesh(underWaterMesh, "UnderWater Mesh", modifyBoatMesh.underWaterTriangleData);
 	}
 
     void FixedUpdate()

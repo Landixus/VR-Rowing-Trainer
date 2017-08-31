@@ -91,6 +91,9 @@
     <Compile Include="Assets\Scripts\Menu Scripts\MenuInput.cs" />
     <Compile Include="Assets\Scripts\Menu Scripts\QuitGame.cs" />
     <Compile Include="Assets\Scripts\Menu Scripts\VRIteractiveEventHandler.cs" />
+    <Compile Include="Assets\Scripts\Object Generation Scripts\CreateBuoy.cs" />
+    <Compile Include="Assets\Scripts\Object Generation Scripts\InGameSpawn.cs" />
+    <Compile Include="Assets\Scripts\Object Generation Scripts\SpawnObjects.cs" />
     <Compile Include="Assets\Scripts\PM5 Scripts\PM5_Communication.cs" />
     <Compile Include="Assets\Scripts\PM5 Scripts\Stats_To_XML.cs" />
     <Compile Include="Assets\Scripts\Training Scripts\FPS.cs" />
@@ -104,6 +107,9 @@
     <Compile Include="Assets\Scripts\Training Scripts\Video_Playback.cs" />
     <Compile Include="Assets\Scripts\Training Scripts\look.cs" />
     <Compile Include="Assets\Scripts\Water Scripts\BoatPhysics.cs" />
+    <Compile Include="Assets\Scripts\Water Scripts\Buoy.cs" />
+    <Compile Include="Assets\Scripts\Water Scripts\CheckDist.cs" />
+    <Compile Include="Assets\Scripts\Water Scripts\Distant.cs" />
     <Compile Include="Assets\Scripts\Water Scripts\ModifyBoatMesh.cs" />
     <Compile Include="Assets\Scripts\Water Scripts\TriangleData.cs" />
     <Compile Include="Assets\Scripts\Water Scripts\WaterController.cs" />

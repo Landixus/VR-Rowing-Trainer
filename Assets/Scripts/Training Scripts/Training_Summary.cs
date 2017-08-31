@@ -22,7 +22,7 @@ public class Training_Summary : MonoBehaviour {
     public double splitTime; //current split time
 
 	public double distance; //distance the user has travelled
-	private const double length = 4; //length of the training session
+	private const double length = 50; //length of the training session
 	private int count = 1;
 	private bool finished = false;
 	private float datarate; //rate to refresh video playback speed
