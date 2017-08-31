@@ -6,8 +6,9 @@ public class Get_Seat_Pos_Improved : MonoBehaviour {
 	public SteamVR_TrackedObject headset;
 	public SteamVR_TrackedController controller; //controller object
 	public Transform sp; //seat position and rotation
-	public Transform pb; //pacing boat position and rotation
-	public Transform pbp; //position and rotation of the empty game object that dictates pacing boat position and rotation
+	//public Transform datapos;
+	//public Transform pb; //pacing boat position and rotation
+	//public Transform pbp; //position and rotation of the empty game object that dictates pacing boat position and rotation
 	public bool reposition; //tracks if the position has been changed
 
 	// Use this for initialization
@@ -21,16 +22,17 @@ public class Get_Seat_Pos_Improved : MonoBehaviour {
 	//set position of the seat
 	public void SeatPos() {
 		sp.position = headset.transform.position;
-		//sp.rotation = controller.transform.rotation;
 		sp.rotation = Quaternion.Euler(new Vector3(0, headset.transform.rotation.eulerAngles.y, 0));
+		//datapos.position = headset.transform.position;
+		//datapos.rotation = Quaternion.Euler(new Vector3(0, headset.transform.rotation.eulerAngles.y, 0));
 		//Debug.Log("controller position:" + sp.position);
 		//Debug.Log("controller rotation:" + sp.rotation);
 		//reposition = true;
 		//controller.enabled = false;
 
 		//Adjusts position and rotation of pacing boat
-		pb.position = pbp.position;
-		pb.rotation = Quaternion.Euler(new Vector3(sp.rotation.eulerAngles.x, sp.rotation.eulerAngles.y, sp.rotation.eulerAngles.z));
+		//pb.position = pbp.position;
+		//pb.rotation = Quaternion.Euler(new Vector3(sp.rotation.eulerAngles.x, sp.rotation.eulerAngles.y, sp.rotation.eulerAngles.z));
 	}
 
 	//checks for trigger press

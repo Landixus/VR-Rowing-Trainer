@@ -22,7 +22,7 @@ public class Training_Summary : MonoBehaviour {
     public double splitTime; //current split time
 
 	public double distance; //distance the user has travelled
-	private const double length = 100; //length of the training session
+	private const double length = 4; //length of the training session
 	private int count = 1;
 	private bool finished = false;
 	private float datarate; //rate to refresh video playback speed
@@ -141,11 +141,11 @@ public class Training_Summary : MonoBehaviour {
 		avgSplits = avgSplits / count;
 		TimeSpan ts = TimeSpan.FromSeconds(time);
 		TimeSpan tsSplit = TimeSpan.FromSeconds(avgSplits);
-		TimeText.text = "Time: " + ts.ToString();
-		AverageSplitsText.text = "Average Splits: " + tsSplit.ToString();
-		AverageStrokesText.text = "AverageStrokes: " + avgStrokes_pm;
-		AverageSpeedText.text = "AverageSpeed: " + avgSpeed;
-		AveragePowerText.text = "AveragePower: " + avgPower;
+		TimeText.text =           "Time:              " + ts.Minutes + ":" + ts.Seconds + "." + ts.Milliseconds;
+		AverageSplitsText.text =  "Average Splits:  " + tsSplit.Minutes + ":" + tsSplit.Seconds + "." + tsSplit.Milliseconds;
+		AverageStrokesText.text = "AverageStrokes: " + Math.Round(avgStrokes_pm, 2);
+		AverageSpeedText.text =   "AverageSpeed:   " + Math.Round(avgSpeed, 2);
+		AveragePowerText.text =   "AveragePower:   " + Math.Round(avgPower, 2);
 		vb.SpeedDisplay.enabled = false;
 		Summary.SetActive(true);
 	}
