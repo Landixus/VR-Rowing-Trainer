@@ -89,7 +89,7 @@ public class Video_Playback : MonoBehaviour {
 				AudioController();
 			}
 		}
-        SpeedDisplay.text = ConvertSpeed().ToString() + "km/h";
+        SpeedDisplay.text = Math.Round(video_playback, 2).ToString() + " m/s";
 	}
 
 	// Used to update the speed of the environment
@@ -101,21 +101,21 @@ public class Video_Playback : MonoBehaviour {
     }
 
     //convert speed from m/s to km/h
-    public double ConvertSpeed() 
+    /*public double ConvertSpeed() 
 	{
 		double convertedSpeed = boat_speed * 3600/ 1000; //convert m/s to km/h
 		return convertedSpeed;
 	}
-
+	*/
     public void AudioController()
     {
-       if (ConvertSpeed() < minSpeed)
+       if (video_playback < minSpeed)
         {
 			Debug.Log("Speed up");
             audioSource.PlayOneShot(speedUp);
             lastPlayed = 0;
         }
-       if (ConvertSpeed() > maxSpeed)
+       if (video_playback > maxSpeed)
         {
 			Debug.Log("Slow Down");
 			audioSource.PlayOneShot(slowDown);

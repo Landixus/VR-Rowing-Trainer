@@ -44,7 +44,7 @@ public class Training_Summary : MonoBehaviour {
 		pm_com = GetComponent<PM5_Communication>();
 		vb = GetComponent<Video_Playback>();
 		sceneData = GameObject.Find("SceneDataManager").GetComponent<SceneData>();
-		distance = sceneData.length;
+		length = sceneData.length;
 		power = new List<double>();
         strokes_pm = new List<double>();
         speed = new List<double>();
