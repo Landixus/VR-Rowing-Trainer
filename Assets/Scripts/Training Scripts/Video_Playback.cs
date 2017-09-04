@@ -19,6 +19,7 @@ public class Video_Playback : MonoBehaviour {
 	public Text SpeedDisplay; //text object to display speed
     private Pace_Boat pb; //pace boat object
 	private PM5_Communication pm_com; //used to get data from erg
+	private SceneData sceneData;
 
     private float framerate; //rate to refresh video playback speed
 	private float deltatime; //time since last refresh
@@ -38,6 +39,7 @@ public class Video_Playback : MonoBehaviour {
 	private void Awake() {
 		Debug.Log("Video awake");
 		pm_com = GetComponent<PM5_Communication>();
+		sceneData = GameObject.Find("SceneDataManager").GetComponent<SceneData>();
 		boat_speed = pm_com.current_Speed;
 		playerstarted = false;
 	}
@@ -57,6 +59,8 @@ public class Video_Playback : MonoBehaviour {
         green = new Color32(0x00, 0xFF, 0x4C, 0xFF);
 		red = new Color32(0xFF, 0x00, 0x00, 0xFF);
 		audioSource = GetComponent<AudioSource>();
+		minSpeed = sceneData.minSpeed;
+		maxSpeed = sceneData.maxSpeed;
 
 	}
 	

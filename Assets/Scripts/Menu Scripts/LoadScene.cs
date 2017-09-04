@@ -10,4 +10,10 @@ public class LoadScene : MonoBehaviour {
         SceneManager.LoadScene(SceneIndex);
     }
 
+	public void LoadCurrentScene() 
+	{
+		string currentScene = SceneManager.GetActiveScene().name;
+		SceneManager.LoadScene(currentScene);
+	}
+
 }

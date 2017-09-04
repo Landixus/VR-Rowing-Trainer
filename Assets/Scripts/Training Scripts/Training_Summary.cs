@@ -22,14 +22,14 @@ public class Training_Summary : MonoBehaviour {
     public double splitTime; //current split time
 
 	public double distance; //distance the user has travelled
-	private const double length = 50; //length of the training session
+	private double length; //length of the training session
 	private int count = 1;
 	private bool finished = false;
 	private float datarate; //rate to refresh video playback speed
     private float deltatime; //time since last refresh
 
 	private Video_Playback vb;
-
+	private SceneData sceneData;
 
 	private PM5_Communication pm_com; //used to get data from erg
 	public GameObject Summary;
@@ -43,6 +43,8 @@ public class Training_Summary : MonoBehaviour {
 	void Start () {
 		pm_com = GetComponent<PM5_Communication>();
 		vb = GetComponent<Video_Playback>();
+		sceneData = GameObject.Find("SceneDataManager").GetComponent<SceneData>();
+		distance = sceneData.length;
 		power = new List<double>();
         strokes_pm = new List<double>();
         speed = new List<double>();
@@ -65,11 +67,11 @@ public class Training_Summary : MonoBehaviour {
 	void Update () {
 		if (vb.playerstarted && !finished) {
 			time = time + Time.deltaTime;
-			checkSplit();
+			CheckSplit();
 			deltatime += Time.deltaTime;
 			// Debug.Log("deltatime:" + deltatime);
 			if (deltatime >= datarate) {
-				updateSummary();
+				UpdateSummary();
 				deltatime = 0.0f;
 			}
 		}
@@ -77,7 +79,7 @@ public class Training_Summary : MonoBehaviour {
 	}
 
 	// Used to check if the user has completed a split
-	public void checkSplit() {
+	public void CheckSplit() {
 		
 		distance = pm_com.current_Distance;
 		double splitDistance = (length / 4);
@@ -99,12 +101,12 @@ public class Training_Summary : MonoBehaviour {
 			finished = true;
 			//Debug.Log("Adding last Split");
 			split[count-1] = splitTime;
-            displaySummary();
+            DisplaySummary();
 		}
 	}
 
 	// Used to update the data needed for the training summary
-	public void updateSummary() {
+	public void UpdateSummary() {
 		//Debug.Log("Updating summary");
 		power.Add(pm_com.current_Power);
 		strokes_pm.Add(pm_com.current_Cadence);
@@ -127,7 +129,7 @@ public class Training_Summary : MonoBehaviour {
 	}
 
 	// Used to calculate and display the training summary
-	public void displaySummary() {
+	public void DisplaySummary() {
 		//Debug.Log("Displaying summary");
 		avgPower = GetAverage(power);
 		avgStrokes_pm = GetAverage(strokes_pm);
