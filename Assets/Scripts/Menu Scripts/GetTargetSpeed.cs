@@ -4,14 +4,33 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GetTargetSpeed : MonoBehaviour {
-    
-    public float SliderValue; //value from slider as float
-    public Text ValueText;
 
-    public void TargetSpeed()
+	private Slider slider;
+	public float targetSpeed; //value from slider as float
+    private Text valueText;
+	private SceneData sceneData;
+
+	public void SliderValue() {
+		slider = GameObject.Find("TargetSpeedSlider").GetComponent<Slider>();
+		valueText = GameObject.Find("TargetSpeedValue").GetComponent<Text>();
+		sceneData = GameObject.Find("SceneDataManager").GetComponent<SceneData>();
+		if (sceneData.targetSpeed != 0) {
+			slider.value = sceneData.targetSpeed;
+			valueText.text = "Target Speed: " + sceneData.targetSpeed.ToString() + " m/s";
+		}
+	}
+
+	public void TargetSpeed()
     {
-        SliderValue = GameObject.Find("TargetSpeedSlider").GetComponent<Slider>().value;
-        //Debug.Log(SliderValue);
-        ValueText.text = "Target Speed: " + SliderValue.ToString();
+		slider = GameObject.Find("TargetSpeedSlider").GetComponent<Slider>();
+		valueText = GameObject.Find("TargetSpeedValue").GetComponent<Text>();
+		targetSpeed = slider.value;
+		//Debug.Log(targetSpeed);
+		valueText.text = "Target Speed: " + targetSpeed.ToString() + " m/s";
     }
+
+	public void UpdateSpeedData() {
+		sceneData = GameObject.Find("SceneDataManager").GetComponent<SceneData>();
+		sceneData.targetSpeed = targetSpeed;
+	}
 }

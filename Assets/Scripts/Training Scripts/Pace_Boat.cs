@@ -14,7 +14,7 @@ public class Pace_Boat : MonoBehaviour {
 
 	private void Awake() {
 		try {
-			pbspeed = GameObject.Find("SceneDataManager").GetComponent<GetTargetSpeed>().SliderValue;
+			pbspeed = GameObject.Find("SceneDataManager").GetComponent<SceneData>().targetSpeed;
 		} catch { };
 		//Debug.Log(pbspeed);
 	}

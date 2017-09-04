@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ControllerTag
   - Button
+  - InputField
   layers:
   - Default
   - TransparentFX
