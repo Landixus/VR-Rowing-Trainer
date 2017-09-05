@@ -1,5 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/*  Author: Benjamin Ferguson
+    Date: 05/09/17
+    Purpose: To get the speed from the slider and to set the slider to a previous
+	value if there is one and also update the game object that is uses the data in all scenes.
+*/
+
 using UnityEngine;
 using UnityEngine.UI;
 

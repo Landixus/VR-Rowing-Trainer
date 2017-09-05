@@ -1,6 +1,6 @@
 ﻿/*  Author: Benjamin Ferguson
-    Date: 11/05/17
-    Purpose: To track the training data and display the training summary
+    Date: 05/09/17
+    Purpose: To track the training data during the seesion and display the training summary
              after completion of training.
 */
 
@@ -14,25 +14,25 @@ public class Training_Summary : MonoBehaviour {
     public List<double> power; //list of power data of user's whole training session
 	public List<double> strokes_pm; //list of strokes per mintue data of the user's whole training session
 	public List<double> speed; //list of speed data of the user's whole training session
-	public double avgPower; 
-	public double avgStrokes_pm; 
-	public double avgSpeed;
-	public double time; //time of user's training session
+	public double avgPower;  //the avg power calculated at the end of the session from the data that was collected
+	public double avgStrokes_pm; //the avg stokes per minute calculated at the end of the session from the data that was collected
+	public double avgSpeed; //the avg speed calculated at the end of the session from the data that was collected
+	public double time; //total time of user's training session
     public double[] split; //split times of the user's training session
     public double splitTime; //current split time
 
-	public double distance; //distance the user has travelled
-	private double length; //length of the training session
-	private int count = 1;
-	private bool finished = false;
-	private float datarate; //rate to refresh video playback speed
-    private float deltatime; //time since last refresh
+	public double distance; //total distance the user has travelled
+	private double length; //total length of the training session set by the user
+	private int count = 1; //used to track the splits
+	private bool finished = false; //used to determine when the user has finished the session
+	private float datarate; //rate that the data is to be collected
+    private float deltatime; //time since the last set of data was collected
 
-	private Video_Playback vb;
-	private SceneData sceneData;
+	private Video_Playback videoPlayback; //used to find out when the user has started
+	private SceneData sceneData; //used to get the length of the session the user has set
 
 	private PM5_Communication pm_com; //used to get data from erg
-	public GameObject Summary;
+	public GameObject Summary; //used to display the training summary
 	public Text TimeText;
 	public Text AverageSplitsText;
 	public Text AverageStrokesText;
@@ -42,7 +42,7 @@ public class Training_Summary : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		pm_com = GetComponent<PM5_Communication>();
-		vb = GetComponent<Video_Playback>();
+		videoPlayback = GetComponent<Video_Playback>();
 		sceneData = GameObject.Find("SceneDataManager").GetComponent<SceneData>();
 		length = sceneData.length;
 		power = new List<double>();
@@ -54,18 +54,11 @@ public class Training_Summary : MonoBehaviour {
 		//used to only get data every 1s
         datarate = 1f;
         deltatime = 0.0f;
-
-		//text objects for displaying the values to the user
-		//AverageSplitsText = GameObject.Find("AverageSplitsText").GetComponent<Text>();
-		//AverageStrokesText = GameObject.Find("AverageStrokesText").GetComponent<Text>();
-		//AverageSpeedText = GameObject.Find("AverageSpeedText").GetComponent<Text>();
-		//AveragePowerText = GameObject.Find("AveragePowerText").GetComponent<Text>();
-		//TimeText = GameObject.Find("TimeText").GetComponent<Text>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (vb.playerstarted && !finished) {
+		if (videoPlayback.playerstarted && !finished) {
 			time = time + Time.deltaTime;
 			CheckSplit();
 			deltatime += Time.deltaTime;
@@ -87,19 +80,15 @@ public class Training_Summary : MonoBehaviour {
 		splitTime = splitTime + Time.deltaTime;
         if (distance > splitDistance*count && split[count - 1] == 0 && count < 4)
         {
-			//Debug.Log("Adding Split" + distance);
 			split[count - 1] = splitTime;
 			splitTime = 0;
 			count++;
-			//Debug.Log("count = " + count);
-			//Debug.Log("SplitDistance: " + splitDistance * count);
 		}
 			   
         //check if the end has been reached
 		if (distance > length && !finished) 
         {
 			finished = true;
-			//Debug.Log("Adding last Split");
 			split[count-1] = splitTime;
             DisplaySummary();
 		}
@@ -107,7 +96,6 @@ public class Training_Summary : MonoBehaviour {
 
 	// Used to update the data needed for the training summary
 	public void UpdateSummary() {
-		//Debug.Log("Updating summary");
 		power.Add(pm_com.current_Power);
 		strokes_pm.Add(pm_com.current_Cadence);
 		speed.Add(pm_com.current_Speed);
@@ -124,13 +112,11 @@ public class Training_Summary : MonoBehaviour {
 			count++;
 		}
 		avg = avg / count;
-		//Debug.Log(avg);
 		return avg;
 	}
 
 	// Used to calculate and display the training summary
 	public void DisplaySummary() {
-		//Debug.Log("Displaying summary");
 		avgPower = GetAverage(power);
 		avgStrokes_pm = GetAverage(strokes_pm);
 		avgSpeed = GetAverage(speed);
@@ -148,7 +134,7 @@ public class Training_Summary : MonoBehaviour {
 		AverageStrokesText.text = "AverageStrokes: " + Math.Round(avgStrokes_pm, 2);
 		AverageSpeedText.text =   "AverageSpeed:   " + Math.Round(avgSpeed, 2);
 		AveragePowerText.text =   "AveragePower:   " + Math.Round(avgPower, 2);
-		vb.SpeedDisplay.enabled = false;
+		videoPlayback.SpeedDisplay.enabled = false;
 		Summary.SetActive(true);
 	}
 }

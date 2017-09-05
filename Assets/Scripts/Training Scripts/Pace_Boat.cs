@@ -1,7 +1,8 @@
 ﻿/*  Author: Benjamin Ferguson
     Date: 05/09/17
-    Purpose: To set the position of the user in the room so the scene can then 
-	be positioned around that location.
+    Purpose: To get the speed value from the user and set the speed of the
+	pacing boat. Using the difference in speed of the player and the pacing
+	boat to control the movement of the pacing boat.
 */
 
 using UnityEngine;
