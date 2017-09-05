@@ -42,6 +42,11 @@ public class Video_Playback : MonoBehaviour {
 		sceneData = GameObject.Find("SceneDataManager").GetComponent<SceneData>();
 		boat_speed = pm_com.current_Speed;
 		playerstarted = false;
+		//RefreshVideoSpeed();
+		video.StepForward();
+		Debug.Log("Frame: " + video.frame);
+		Debug.Log("Prepared " + video.isPrepared);
+		Debug.Log("Playing " + video.isPlaying);
 	}
 
 	// Use this for initialization
@@ -66,7 +71,9 @@ public class Video_Playback : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        deltatime += Time.deltaTime;
+		Debug.Log("Frame: " + video.frame);
+		Debug.Log("Prepared " + video.isPrepared);
+		deltatime += Time.deltaTime;
 		boat_speed = pm_com.current_Speed;
 		if (!playerstarted && boat_speed > 0) {
 			playerstarted = true;
