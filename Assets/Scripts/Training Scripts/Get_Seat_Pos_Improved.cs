@@ -1,43 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/*  Author: Benjamin Ferguson
+    Date: 05/09/17
+    Purpose: To set the position of the user in the room so the scene can then 
+	be positioned around that location.
+*/
+
 using UnityEngine;
 
 public class Get_Seat_Pos_Improved : MonoBehaviour {
-	public SteamVR_TrackedObject headset;
+	public SteamVR_TrackedObject headset; //headset object, used to get the rotation which the user will be facing in the room
 	public SteamVR_TrackedController controller; //controller object
-	public Transform sp; //seat position and rotation
-	//public Transform datapos;
-	//public Transform pb; //pacing boat position and rotation
-	//public Transform pbp; //position and rotation of the empty game object that dictates pacing boat position and rotation
+	public Transform playerPos; //position and rotation of the player on the ERG
 	public bool reposition; //tracks if the position has been changed
 
 	// Use this for initialization
 	void Start() {
-		//controller = GameObject.Find("Controller(right)").GetComponent<SteamVR_TrackedController>();
-		controller.TriggerClicked += Trigger;
-		//sp = GameObject.Find("PlayerPos").GetComponent<Transform>();
-		reposition = false;
+		controller.TriggerClicked += Trigger; //adds Trigger function to the trigger event system
+		reposition = false; 
 	}
 
-	//set position of the seat
+	//set position of the player transform to the position of the headset
 	public void SeatPos() {
-		sp.position = headset.transform.position;
-		sp.rotation = Quaternion.Euler(new Vector3(0, headset.transform.rotation.eulerAngles.y, 0));
-		//datapos.position = headset.transform.position;
-		//datapos.rotation = Quaternion.Euler(new Vector3(0, headset.transform.rotation.eulerAngles.y, 0));
-		//Debug.Log("controller position:" + sp.position);
-		//Debug.Log("controller rotation:" + sp.rotation);
-		//reposition = true;
-		//controller.enabled = false;
-
-		//Adjusts position and rotation of pacing boat
-		//pb.position = pbp.position;
-		//pb.rotation = Quaternion.Euler(new Vector3(sp.rotation.eulerAngles.x, sp.rotation.eulerAngles.y, sp.rotation.eulerAngles.z));
+		playerPos.position = headset.transform.position;
+		playerPos.rotation = Quaternion.Euler(new Vector3(0, headset.transform.rotation.eulerAngles.y, 0));
 	}
 
-	//checks for trigger press
+	//checks for trigger press and calls function to move the position of the user
 	private void Trigger(object sender, ClickedEventArgs e) {
-		//if(!reposition) {
+		//if(!reposition) { //used to only reposition once
 		SeatPos();
 		//}
 	}

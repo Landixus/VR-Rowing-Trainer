@@ -1,7 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/*  Author: Benjamin Ferguson
+    Date: 05/09/17
+    Purpose: To set the position of the user in the room so the scene can then 
+	be positioned around that location.
+*/
+
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Pace_Boat : MonoBehaviour {
 	public double pbspeed; //speed of the pace boat in m/s

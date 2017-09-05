@@ -12,7 +12,7 @@ using UnityEngine.UI;
 
 public class Video_Playback : MonoBehaviour {
 	private double boat_speed; //speed of the boat
-    private const double video_speed = 0.875; //speed the video was recorded at in m/s
+    private const double video_speed = 1; //speed the video was recorded at in m/s
 	private double normalise_multiplier; //video playback speed at 1m/s
     public double video_playback; //the video playback speed to match the boat speed
     public VideoPlayer video; //video object
