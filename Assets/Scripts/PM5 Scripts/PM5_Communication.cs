@@ -44,6 +44,7 @@ public class PM5_Communication : MonoBehaviour {
 	// Use this for initialization
 	void Start() {
 		Initialize();
+		Reset_ERG();
 		for (int i = 1; i <= 5; i++) {
 			speed_List.AddFirst(0.0);
 		}
@@ -188,5 +189,74 @@ public class PM5_Communication : MonoBehaviour {
 		current_Power = Get_Power();
 		current_MinPer500m = (500 / current_Speed) / 60;	// In minutes
 		current_Cadence = Get_Cadence();
+	}
+
+	// Sets the PM5 Status to the Finished state - Only runs if PM5 is currently InUse state
+	private void Set_Status_Finished() {
+		UINT16_T unit_address = 0, cmd_data_size = 1;
+		UINT32_T[] cmd_data = new UINT32_T[] { 0x86, 0, 0, 0, 0 }, rsp_data = new UINT32_T[] { 0, 0, 0, 0, 0 };
+		UINT16_T rsp_data_size_val = 64;
+		PTR_T rsp_data_size = (PTR_T)rsp_data_size_val;
+		ERRCODE_T error = 1;
+		error = tkcmdsetCSAFE_command(unit_address, cmd_data_size, cmd_data, ref rsp_data_size, rsp_data);
+		Handle_error(error, "tkcmdsetCSAFE_command: CSAFE_GOFINISHED_CMD");
+		return;
+	}
+
+	// Sets the PM5 Status to the Idle state to allow for ID Entry
+	private void Set_Status_GoIdle() {
+		UINT16_T unit_address = 0, cmd_data_size = 1;
+		UINT32_T[] cmd_data = new UINT32_T[] { 0x82, 0, 0, 0, 0 }, rsp_data = new UINT32_T[] { 0, 0, 0, 0, 0 };
+		UINT16_T rsp_data_size_val = 64;
+		PTR_T rsp_data_size = (PTR_T)rsp_data_size_val;
+		ERRCODE_T error = 1;
+		error = tkcmdsetCSAFE_command(unit_address, cmd_data_size, cmd_data, ref rsp_data_size, rsp_data);
+		Handle_error(error, "tkcmdsetCSAFE_command: CSAFE_GOIDLE_CMD");
+		return;
+	}
+
+	// Resets the PM5 - Only runs if status is in Finished state
+	private void Set_Status_Reset() {
+		UINT16_T unit_address = 0, cmd_data_size = 1;
+		UINT32_T[] cmd_data = new UINT32_T[] { 0x81, 0, 0, 0, 0 }, rsp_data = new UINT32_T[] { 0, 0, 0, 0, 0 };
+		UINT16_T rsp_data_size_val = 64;
+		PTR_T rsp_data_size = (PTR_T)rsp_data_size_val;
+		ERRCODE_T error = 1;
+		error = tkcmdsetCSAFE_command(unit_address, cmd_data_size, cmd_data, ref rsp_data_size, rsp_data);
+		Handle_error(error, "tkcmdsetCSAFE_command: CSAFE_RESET_CMD");
+		return;
+	}
+
+	// Sets the PM5 ID - Only runs if status is in Idle state
+	private void Set_Status_GoHaveID() {
+		UINT16_T unit_address = 0, cmd_data_size = 1;
+		UINT32_T[] cmd_data = new UINT32_T[] { 0x83, 0, 0, 0, 0 }, rsp_data = new UINT32_T[] { 0, 0, 0, 0, 0 };
+		UINT16_T rsp_data_size_val = 64;
+		PTR_T rsp_data_size = (PTR_T)rsp_data_size_val;
+		ERRCODE_T error = 1;
+		error = tkcmdsetCSAFE_command(unit_address, cmd_data_size, cmd_data, ref rsp_data_size, rsp_data);
+		Handle_error(error, "tkcmdsetCSAFE_command: CSAFE_GOHAVEID_CMD");
+		return;
+	}
+
+	// Sets the PM5 to the In Use State 
+	private void Set_Status_GoInUse() {
+		UINT16_T unit_address = 0, cmd_data_size = 1;
+		UINT32_T[] cmd_data = new UINT32_T[] { 0x85, 0, 0, 0, 0 }, rsp_data = new UINT32_T[] { 0, 0, 0, 0, 0 };
+		UINT16_T rsp_data_size_val = 64;
+		PTR_T rsp_data_size = (PTR_T)rsp_data_size_val;
+		ERRCODE_T error = 1;
+		error = tkcmdsetCSAFE_command(unit_address, cmd_data_size, cmd_data, ref rsp_data_size, rsp_data);
+		Handle_error(error, "tkcmdsetCSAFE_command: CSAFE_GOINUSE_CMD");
+		return;
+	}
+
+	public void Reset_ERG() {
+		Set_Status_GoInUse();
+		Set_Status_Finished();
+		Set_Status_Reset();
+		Set_Status_GoIdle();
+		Set_Status_GoHaveID();
+		Set_Status_GoInUse();
 	}
 }
