@@ -113,7 +113,7 @@
 #ifndef PM3PROC_TYPES
 #define PM3PROC_TYPES
    #ifdef WIN32  
-      // Use StdCall on Windows for VB6/.NET support 
+      // Use StdCall on Windows for videoPlayback6/.NET support 
       #define PM3CALLBACKAPI __stdcall 
    #else  
       // No StdCall on Mac/Linux  

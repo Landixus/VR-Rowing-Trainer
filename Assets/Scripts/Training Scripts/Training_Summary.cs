@@ -30,10 +30,11 @@ public class Training_Summary : MonoBehaviour {
 
 	private Video_Playback videoPlayback; //used to find out when the user has started
 	private SceneData sceneData; //used to get the length of the session the user has set
-
 	private PM5_Communication pm_com; //used to get data from erg
 	public GameObject Summary; //used to display the training summary
-	public Text TimeText;
+
+	//these text objects 
+	public Text TimeText; 
 	public Text AverageSplitsText;
 	public Text AverageStrokesText;
 	public Text AverageSpeedText;
