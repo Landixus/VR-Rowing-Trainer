@@ -28,25 +28,25 @@ public class Video_Playback : MonoBehaviour {
     public double maxSpeed; //speed at which the player needs to slow down
     public AudioClip speedUp;
     public AudioClip slowDown;
+	public AudioClip row;
+	private float rowSpeed;
+	private float rowTime;
     private float lastPlayed; //time since audio was last played
     private Color green;
     private Color red;
 	public bool playerstarted;
 	private AudioSource audioSource;
+	private bool finished;
 
 	private bool freeSession;
 
 	private void Awake() {
-		Debug.Log("Video awake");
 		pm_com = GetComponent<PM5_Communication>();
 		sceneData = GameObject.Find("SceneDataManager").GetComponent<SceneData>();
 		boat_speed = pm_com.current_Speed;
 		playerstarted = false;
-		//RefreshVideoSpeed();
 		video.StepForward();
-		Debug.Log("Frame: " + video.frame);
-		Debug.Log("Prepared " + video.isPrepared);
-		Debug.Log("Playing " + video.isPlaying);
+		finished = false;
 	}
 
 	// Use this for initialization
@@ -60,43 +60,57 @@ public class Video_Playback : MonoBehaviour {
 		}
 
 		normalise_multiplier = 1 / video_speed;
+		
         lastPlayed = 0;
         green = new Color32(0x00, 0xFF, 0x4C, 0xFF);
 		red = new Color32(0xFF, 0x00, 0x00, 0xFF);
 		audioSource = GetComponent<AudioSource>();
 		minSpeed = sceneData.minSpeed;
 		maxSpeed = sceneData.maxSpeed;
-
+		rowTime = 0f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log("Frame: " + video.frame);
-		Debug.Log("Prepared " + video.isPrepared);
-		deltatime += Time.deltaTime;
-		boat_speed = pm_com.current_Speed;
-		if (!playerstarted && boat_speed > 0) {
-			playerstarted = true;
+		finished = GetComponent<Training_Summary>().finished;
+		if (!finished) {
+			deltatime += Time.deltaTime;
+			boat_speed = pm_com.current_Speed;
+
+			if (!playerstarted && boat_speed > 0) {
+				playerstarted = true;
+				if (!freeSession) {
+					GameObject.Find("pacing_boat").GetComponent<Animation>().Play();
+				}
+				//Debug.Log("Player Started");
+			}
+			// Debug.Log("deltatime:" + deltatime);
+			RefreshVideoSpeed();
+
 			if (!freeSession) {
-				GameObject.Find("pacing_boat").GetComponent<Animation>().Play();
+				if (video_playback > pb.pbspeed) {
+					SpeedDisplay.color = green;
+				} else {
+					SpeedDisplay.color = red;
+				}
+				lastPlayed += Time.deltaTime;
+				if (lastPlayed > 5 && playerstarted) {
+					AudioController();
+				}
 			}
-			//Debug.Log("Player Started");
+			SpeedDisplay.text = Math.Round(video_playback, 2).ToString() + " m/s";
+			if (pm_com.current_Cadence != 0 && pm_com.current_Speed != 0) {
+				rowSpeed = 60 / pm_com.current_Cadence;
+			}
+			rowTime += Time.deltaTime;
+			if (rowTime > rowSpeed && rowSpeed != 0) {
+				Debug.Log("Row Sound");
+				audioSource.PlayOneShot(row);
+				rowTime = 0f;
+			}
 		}
-		// Debug.Log("deltatime:" + deltatime);
-		RefreshVideoSpeed();
 		
-		if (!freeSession) {
-			if (video_playback > pb.pbspeed) {
-				SpeedDisplay.color = green;
-			} else {
-				SpeedDisplay.color = red;
-			}
-			lastPlayed += Time.deltaTime;
-			if (lastPlayed > 5 && playerstarted) {
-				AudioController();
-			}
-		}
-        SpeedDisplay.text = Math.Round(video_playback, 2).ToString() + " m/s";
+
 	}
 
 	// Used to update the speed of the environment

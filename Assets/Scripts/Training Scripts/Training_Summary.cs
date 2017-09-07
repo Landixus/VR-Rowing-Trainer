@@ -24,7 +24,7 @@ public class Training_Summary : MonoBehaviour {
 	public double distance; //total distance the user has travelled
 	private double length; //total length of the training session set by the user
 	private int count = 1; //used to track the splits
-	private bool finished = false; //used to determine when the user has finished the session
+	public bool finished = false; //used to determine when the user has finished the session
 	private float datarate; //rate that the data is to be collected
     private float deltatime; //time since the last set of data was collected
 

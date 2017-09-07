@@ -254,8 +254,9 @@ public class PM5_Communication : MonoBehaviour {
 	public void Reset_ERG() {
 		Set_Status_GoInUse();
 		Set_Status_Finished();
-		Set_Status_Reset();
 		Set_Status_GoIdle();
+		Set_Status_Reset();
+		
 		Set_Status_GoHaveID();
 		Set_Status_GoInUse();
 	}
