@@ -98,7 +98,7 @@ public class Video_Playback : MonoBehaviour {
 					AudioController();
 				}
 			}
-			SpeedDisplay.text = Math.Round(video_playback, 2).ToString() + " m/s";
+			SpeedDisplay.text = Math.Round(video_playback, 2).ToString("F") + " m/s";
 			if (pm_com.current_Cadence != 0 && pm_com.current_Speed != 0) {
 				rowSpeed = 60 / pm_com.current_Cadence;
 			}

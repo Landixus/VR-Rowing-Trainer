@@ -23,7 +23,7 @@ public class PM5_Communication : MonoBehaviour {
 	
 	// Variables for speed calculation and idle sensing
 	private static UINT32_T last_Distance = 0, last_Time = 0;
-	private static LinkedList <double> speed_List = new LinkedList<double>();
+	public static LinkedList <double> speed_List = new LinkedList<double>();
 	private static LinkedList<double> power_List = new LinkedList<double>();
 	private static int idle_Counter;
 
@@ -44,13 +44,9 @@ public class PM5_Communication : MonoBehaviour {
 	// Use this for initialization
 	void Start() {
 		Initialize();
+		// Setting the status to the workout state seemed to fix a recurring bug on first use
+		Set_Status_GoToWorkout();
 		Reset_ERG();
-		for (int i = 1; i <= 5; i++) {
-			speed_List.AddFirst(0.0);
-		}
-		for (int i = 1; i <= 2; i++) {
-			power_List.AddFirst(0.0);
-		}
 	}
 
 	// Update is called once per frame
@@ -60,23 +56,20 @@ public class PM5_Communication : MonoBehaviour {
 
 	// Initialize communication protocols with the Concept2 device
 	private static void Initialize() {
-
 		ERRCODE_T error = 1;
 		error = tkcmdsetDDI_init();
 		Handle_error(error, "tkcmdsetDDI_init");
-		
 		error = 1;
 		error = tkcmdsetCSAFE_init_protocol(1000);			// Timeout set to 1000ms
 		Handle_error(error, "tkcmdsetCSAFE_init_protocol");
 		Device_counter();
-
 		return;
 	}
 
 	// Error handling function to display command name that caused error
 	private static void Handle_error(ERRCODE_T error_value, String error_identifier) {
 		if (error_value != 0) {
-			Debug.Log("Failure to load " + error_identifier);
+			Debug.Log("Failure to load: " + error_identifier);
 		}
 		return;
 	}
@@ -155,8 +148,13 @@ public class PM5_Communication : MonoBehaviour {
 			new_Speed = ((double)current_Distance - (double)last_Distance) / (current_Time - last_Time);
 			last_Distance = current_Distance;
 			last_Time = current_Time;
-			speed_List.AddFirst(new_Speed);
-			speed_List.RemoveLast();
+			if (new_Speed < 0) {
+				speed_List.AddFirst(0.0);
+				speed_List.RemoveLast();
+			} else {
+				speed_List.AddFirst(new_Speed);
+				speed_List.RemoveLast();
+			}
 			foreach (var speed in speed_List) {
 				speed_Total += speed;
 			}
@@ -191,10 +189,11 @@ public class PM5_Communication : MonoBehaviour {
 		current_Cadence = Get_Cadence();
 	}
 
-	// Sets the PM5 Status to the Finished state - Only runs if PM5 is currently InUse state
+	// Sets the PM5 Status to the Finished state - Only runs if PM5 is currently InUse state - 0x86
+	// Added the InUse state to the beginning of this code to eliminate a recurring bug - 0x85
 	private void Set_Status_Finished() {
-		UINT16_T unit_address = 0, cmd_data_size = 1;
-		UINT32_T[] cmd_data = new UINT32_T[] { 0x86, 0, 0, 0, 0 }, rsp_data = new UINT32_T[] { 0, 0, 0, 0, 0 };
+		UINT16_T unit_address = 0, cmd_data_size = 2;
+		UINT32_T[] cmd_data = new UINT32_T[] { 0x85, 0x86, 0, 0, 0 }, rsp_data = new UINT32_T[] { 0, 0, 0, 0, 0 };
 		UINT16_T rsp_data_size_val = 64;
 		PTR_T rsp_data_size = (PTR_T)rsp_data_size_val;
 		ERRCODE_T error = 1;
@@ -203,10 +202,11 @@ public class PM5_Communication : MonoBehaviour {
 		return;
 	}
 
-	// Sets the PM5 Status to the Idle state to allow for ID Entry
+	// Sets the PM5 Status to the Idle state to allow for ID Entry - 0x82
+	// Added extra command for GoHaveID state - 0x83
 	private void Set_Status_GoIdle() {
-		UINT16_T unit_address = 0, cmd_data_size = 1;
-		UINT32_T[] cmd_data = new UINT32_T[] { 0x82, 0, 0, 0, 0 }, rsp_data = new UINT32_T[] { 0, 0, 0, 0, 0 };
+		UINT16_T unit_address = 0, cmd_data_size = 2;
+		UINT32_T[] cmd_data = new UINT32_T[] { 0x82, 0x83, 0, 0, 0 }, rsp_data = new UINT32_T[] { 0, 0, 0, 0, 0 };
 		UINT16_T rsp_data_size_val = 64;
 		PTR_T rsp_data_size = (PTR_T)rsp_data_size_val;
 		ERRCODE_T error = 1;
@@ -216,6 +216,7 @@ public class PM5_Communication : MonoBehaviour {
 	}
 
 	// Resets the PM5 - Only runs if status is in Finished state
+	// Currently unused as it was not required in the current working format 08/09/2017
 	private void Set_Status_Reset() {
 		UINT16_T unit_address = 0, cmd_data_size = 1;
 		UINT32_T[] cmd_data = new UINT32_T[] { 0x81, 0, 0, 0, 0 }, rsp_data = new UINT32_T[] { 0, 0, 0, 0, 0 };
@@ -251,13 +252,58 @@ public class PM5_Communication : MonoBehaviour {
 		return;
 	}
 
-	public void Reset_ERG() {
-		Set_Status_GoInUse();
+	// Sets the PM5 to the workout screen, currently set to program 1 - 2000m  
+	private void Set_Status_GoToWorkout() {
+		UINT16_T unit_address = 0, cmd_data_size = 4;
+		UINT32_T[] cmd_data = new UINT32_T[] { 0x24, 2, 1, 0, 0 }, rsp_data = new UINT32_T[] { 0, 0, 0, 0, 0 };
+		UINT16_T rsp_data_size_val = 64;
+		PTR_T rsp_data_size = (PTR_T)rsp_data_size_val;
+		ERRCODE_T error = 1;
+		error = tkcmdsetCSAFE_command(unit_address, cmd_data_size, cmd_data, ref rsp_data_size, rsp_data);
+		Handle_error(error, "tkcmdsetCSAFE_command: CSAFE_SETPROGRAM_CMD");
+		return;
+	}
+
+	// Resets the PM5 and all variables
+	private void Reset_ERG() {
+		/* Kept this incase we had issues with a recurring bug in getting the PM5 to reset
+		Set_Status_GoInUse(); //0x85
+		Set_Status_Finished(); //0x86
+		Set_Status_Reset(); //0x81'
+		Set_Status_GoIdle(); //0x82
+		Set_Status_GoInUse(); //0x85
+		Set_Status_Finished(); //0x86
+		Set_Status_Reset(); //0x81'
+		Set_Status_GoIdle(); //0x82
+		Set_Status_GoHaveID(); //0x83
+		*/
+
 		Set_Status_Finished();
 		Set_Status_GoIdle();
-		Set_Status_Reset();
-		
 		Set_Status_GoHaveID();
 		Set_Status_GoInUse();
+		Set_Status_GoToWorkout();
+		
+		// Set all variables to zero for reset
+		current_Speed = 0;
+		current_Power = 0;
+		current_MinPer500m = 0;
+		current_Time = 0; 
+		current_Distance = 0; 
+		current_Cadence = 0;
+		idle_Counter = 0;
+		last_Distance = 0;
+		last_Time = 0;
+
+		// Cleared speed and power lists and re-initialized with zeros
+		speed_List.Clear();
+		power_List.Clear();
+		for (int i = 1; i <= 5; i++) {
+			speed_List.AddFirst(0.0);
+		}
+		for (int i = 1; i <= 2; i++) {
+			power_List.AddFirst(0.0);
+		}
+		return;
 	}
 }

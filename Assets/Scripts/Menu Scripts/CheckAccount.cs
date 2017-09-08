@@ -13,6 +13,7 @@ public class CheckAccount : MonoBehaviour {
 
 	private SceneData sceneData; // Used to store the logged in user's name and path
 	private InputField username; // Used to retreive the text entered by the user
+	private Data_Logging datalogging; 
 	public string loggedInUser; // Stores the name of the logged in user
 	public string userPath; // Stores the directory path of the logged in user
 

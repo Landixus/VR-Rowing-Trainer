@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿/*
+ * Author: Grant Burgess
+ * Date: 20/08/17
+ * Purpose: Script to save training summary to xml or excel spreadsheet
+ *			Currently unable to complete due to issues using the interop.excel dll with unity
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.Reflection;

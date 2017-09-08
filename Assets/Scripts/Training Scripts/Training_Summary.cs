@@ -1,4 +1,4 @@
-﻿/*  Author: Benjamin Ferguson
+﻿/*  Author: Benjamin Ferguson, Grant Burgess
     Date: 05/09/17
     Purpose: To track the training data during the seesion and display the training summary
              after completion of training.
@@ -32,6 +32,7 @@ public class Training_Summary : MonoBehaviour {
 	private SceneData sceneData; //used to get the length of the session the user has set
 	private PM5_Communication pm_com; //used to get data from erg
 	public GameObject Summary; //used to display the training summary
+	public Data_Logging datalog; //used to log the summary to file
 
 	//these text objects 
 	public Text TimeText; 
@@ -44,6 +45,7 @@ public class Training_Summary : MonoBehaviour {
 	void Start () {
 		pm_com = GetComponent<PM5_Communication>();
 		videoPlayback = GetComponent<Video_Playback>();
+		datalog = GetComponent<Data_Logging>();
 		sceneData = GameObject.Find("SceneDataManager").GetComponent<SceneData>();
 		length = sceneData.length;
 		power = new List<double>();
@@ -132,10 +134,14 @@ public class Training_Summary : MonoBehaviour {
 		TimeSpan tsSplit = TimeSpan.FromSeconds(avgSplits);
 		TimeText.text =           "Time:              " + ts.Minutes + ":" + ts.Seconds + "." + ts.Milliseconds;
 		AverageSplitsText.text =  "Average Splits:  " + tsSplit.Minutes + ":" + tsSplit.Seconds + "." + tsSplit.Milliseconds;
-		AverageStrokesText.text = "AverageStrokes: " + Math.Round(avgStrokes_pm, 2);
-		AverageSpeedText.text =   "AverageSpeed:   " + Math.Round(avgSpeed, 2);
-		AveragePowerText.text =   "AveragePower:   " + Math.Round(avgPower, 2);
+		AverageStrokesText.text = "AverageStrokes: " + Math.Round(avgStrokes_pm, 2).ToString("F");
+		AverageSpeedText.text =   "AverageSpeed:   " + Math.Round(avgSpeed, 2).ToString("F");
+		AveragePowerText.text =   "AveragePower:   " + Math.Round(avgPower, 2).ToString("F");
 		videoPlayback.SpeedDisplay.enabled = false;
 		Summary.SetActive(true);
+		// Addition to log summary to file
+		string timeString = (ts.Minutes + ":" + ts.Seconds + "." + ts.Milliseconds);
+		string splitsString = (tsSplit.Minutes + ":" + tsSplit.Seconds + "." + tsSplit.Milliseconds);
+		datalog.Create_Summary(distance, timeString, splitsString, avgStrokes_pm, avgSpeed, avgPower);
 	}
 }
