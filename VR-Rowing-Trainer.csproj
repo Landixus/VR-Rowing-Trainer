@@ -99,11 +99,13 @@
     <Compile Include="Assets\Scripts\PM5 Scripts\Stats_To_XML.cs" />
     <Compile Include="Assets\Scripts\Training Scripts\FPS.cs" />
     <Compile Include="Assets\Scripts\Training Scripts\Get_Seat_Pos_Improved.cs" />
+    <Compile Include="Assets\Scripts\Training Scripts\Oar.cs" />
+    <Compile Include="Assets\Scripts\Training Scripts\PaceOar.cs" />
     <Compile Include="Assets\Scripts\Training Scripts\Pace_Boat.cs" />
     <Compile Include="Assets\Scripts\Training Scripts\Training_Summary.cs" />
     <Compile Include="Assets\Scripts\Training Scripts\Video_Playback.cs" />
-    <Compile Include="Assets\Scripts\Training Scripts\look.cs" />
     <Compile Include="Assets\Scripts\Water Scripts\Buoy.cs" />
+    <Compile Include="Assets\Scripts\Water Scripts\Foam.cs" />
     <Compile Include="Assets\Scripts\Water Scripts\WaterController.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_LaserPointer.cs" />
