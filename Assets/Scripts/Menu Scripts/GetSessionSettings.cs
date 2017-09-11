@@ -90,4 +90,14 @@ public class GetSessionSettings : MonoBehaviour {
 		sceneData.maxSpeed = maxSpeed.value;
 		sceneData.targetSpeed = targetSlider.value;
 	}
+
+	public void SetFreeSession() {
+		sceneData = GameObject.Find("SceneDataManager").GetComponent<SceneData>();
+		sceneData.freeSession = true;
+	}
+
+	public void SetCustomSession() {
+		sceneData = GameObject.Find("SceneDataManager").GetComponent<SceneData>();
+		sceneData.freeSession = false;
+	}
 }

@@ -13,5 +13,5 @@ public class SceneData : MonoBehaviour {
 	public double minSpeed; // Stores the minimum speed the user set
 	public double maxSpeed; // Stores the minimum speed the user set
 	public float targetSpeed; // Stores the target speed the user set
-
+	public bool freeSession;
 }

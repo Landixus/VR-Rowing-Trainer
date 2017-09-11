@@ -41,6 +41,15 @@ public class Video_Playback : MonoBehaviour {
 	private void Awake() {
 		pm_com = GetComponent<PM5_Communication>();
 		sceneData = GameObject.Find("SceneDataManager").GetComponent<SceneData>();
+		
+		freeSession = sceneData.freeSession;
+		if (!freeSession) {
+			pb = GetComponent<Pace_Boat>();
+		} else {
+			Destroy(GameObject.Find("pacing_boat"));
+			Destroy(GameObject.Find("SceneController").GetComponent<Pace_Boat>());
+			Debug.Log("Free Session");
+		}
 		boat_speed = pm_com.current_Speed;
 		playerstarted = false;
 		video.StepForward();
@@ -49,13 +58,7 @@ public class Video_Playback : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		freeSession = false;
-		if (GetComponent<Pace_Boat>() != null) {
-			pb = GetComponent<Pace_Boat>();
-		} else {
-			freeSession = true;
-			Debug.Log("Free Session");
-		}
+		
 
 		normalise_multiplier = 1 / video_speed;
 		

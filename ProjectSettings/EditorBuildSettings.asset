@@ -9,11 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu with terrain.unity
     guid: 501f03c40ebbbc34898bd1c1155cb3c7
   - enabled: 1
-    path: Assets/Scenes/Free Session.unity
-    guid: 731939ca7e396534a868cfffeba2ae63
-  - enabled: 1
     path: Assets/Scenes/Custom Session.unity
     guid: 6799c00c9775cc842b7a2f1ff52e3efb
+  - enabled: 0
+    path: Assets/Scenes/Free Session.unity
+    guid: 731939ca7e396534a868cfffeba2ae63
   - enabled: 0
     path: Assets/Scenes/Menu.unity
     guid: f50c8dcd9639467419e66e478732d6d2
