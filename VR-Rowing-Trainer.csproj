@@ -84,7 +84,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ChangeSliderValue.cs" />
+    <Compile Include="Assets\Scripts\Menu Scripts\ChangeSliderValue.cs" />
     <Compile Include="Assets\Scripts\Menu Scripts\CheckAccount.cs" />
     <Compile Include="Assets\Scripts\Menu Scripts\DontDestroy.cs" />
     <Compile Include="Assets\Scripts\Menu Scripts\GetSessionSettings.cs" />
