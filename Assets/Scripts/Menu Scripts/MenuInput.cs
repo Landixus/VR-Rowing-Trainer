@@ -25,7 +25,7 @@ public class MenuInput : MonoBehaviour {
 	private void Start() {
 		startTimer = false;
 		timeElapsed = false;
-		selectionTime = 2.0f;
+		selectionTime = 1.0f;
 		audioSource = GameObject.Find("Audio").GetComponent<AudioSource>();
 	}
 
@@ -42,7 +42,12 @@ public class MenuInput : MonoBehaviour {
 			if (timeElapsed) {
 				audioSource.PlayOneShot(menuClick);
 				selectedButton.onClick.Invoke();
-				startTimer = false;
+				if(selectedButton.tag == "SliderButton") {
+					startTime = Time.time;
+				} else {
+					startTimer = false;
+				}
+					
 			}
 		}
 	}
@@ -52,7 +57,7 @@ public class MenuInput : MonoBehaviour {
 		// Sets the object the user is looking at
 		interactiveItem = eyeRaycaster.CurrentInteractible;
 		// Checks if a button is not selected yet and the object the user is looking at is a button
-		if (!buttonSelected && interactiveItem.tag == "Button") {
+		if (!buttonSelected && (interactiveItem.tag == "Button" || interactiveItem.tag == "SliderButton")) {
 			buttonSelected = true;
 			selectedButton = interactiveItem.GetComponent<Button>();
 			selectedButton.Select();

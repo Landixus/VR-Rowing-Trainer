@@ -35,7 +35,6 @@ public class GetSessionSettings : MonoBehaviour {
 			minSpeed.value = (float) sceneData.minSpeed;
 			maxSpeed.value = (float) sceneData.maxSpeed;
 			targetSlider.value = sceneData.targetSpeed;
-			valueText.text = "Target Speed: " + sceneData.targetSpeed.ToString() + " m/s";
 		}
 	}
 
