@@ -17,11 +17,9 @@ public class DontDestroy : MonoBehaviour {
 		if (!created) {
 			DontDestroyOnLoad(this.gameObject);
 			created = true;
-			Debug.Log("Creating");
 		}
 		else {
 			Destroy(this.gameObject);
-			Debug.Log("Destroying");
 		}
         
     }

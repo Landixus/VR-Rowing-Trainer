@@ -28,9 +28,7 @@ public class Video_Playback : MonoBehaviour {
     public double maxSpeed; //speed at which the player needs to slow down
     public AudioClip speedUp;
     public AudioClip slowDown;
-	public AudioClip row;
-	private float rowSpeed;
-	private float rowTime;
+
     private float lastPlayed; //time since audio was last played
     private Color green;
     private Color red;
@@ -67,7 +65,6 @@ public class Video_Playback : MonoBehaviour {
 		audioSource = GetComponent<AudioSource>();
 		minSpeed = sceneData.minSpeed;
 		maxSpeed = sceneData.maxSpeed;
-		rowTime = 0f;
 	}
 	
 	// Update is called once per frame
@@ -82,9 +79,7 @@ public class Video_Playback : MonoBehaviour {
 				if (!freeSession) {
 					GameObject.Find("pacing_boat").GetComponent<Animation>().Play();
 				}
-				//Debug.Log("Player Started");
 			}
-			// Debug.Log("deltatime:" + deltatime);
 			RefreshVideoSpeed();
 
 			if (!freeSession) {
@@ -99,46 +94,24 @@ public class Video_Playback : MonoBehaviour {
 				}
 			}
 			SpeedDisplay.text = Math.Round(video_playback, 2).ToString("F") + " m/s";
-			if (pm_com.current_Cadence != 0 && pm_com.current_Speed != 0) {
-				rowSpeed = 60 / pm_com.current_Cadence;
-			}
-			rowTime += Time.deltaTime;
-			if (rowTime > rowSpeed && rowSpeed != 0) {
-				Debug.Log("Row Sound");
-				audioSource.PlayOneShot(row);
-				rowTime = 0f;
-			}
 		}
-		
-
 	}
 
 	// Used to update the speed of the environment
     public void RefreshVideoSpeed() {
         video_playback = boat_speed * normalise_multiplier;
         video.playbackSpeed = (float) video_playback;
-        //Debug.Log("boat speed:" + boat_speed);
-        //Debug.Log("video playback speed:" + video_playback);
     }
 
-    //convert speed from m/s to km/h
-    /*public double ConvertSpeed() 
-	{
-		double convertedSpeed = boat_speed * 3600/ 1000; //convert m/s to km/h
-		return convertedSpeed;
-	}
-	*/
-    public void AudioController()
+	public void AudioController()
     {
        if (video_playback < minSpeed)
         {
-			Debug.Log("Speed up");
             audioSource.PlayOneShot(speedUp);
             lastPlayed = 0;
         }
        if (video_playback > maxSpeed)
         {
-			Debug.Log("Slow Down");
 			audioSource.PlayOneShot(slowDown);
             lastPlayed = 0;
         }
