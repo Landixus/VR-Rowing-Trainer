@@ -24,7 +24,7 @@ public class Buoy : MonoBehaviour {
     void Update()
     {
 		//This moves the buoy at a set speed
-		speed = vp.video_playback;
+		speed = vp.playerSpeed;
 		transform.position += transform.forward * Time.deltaTime * (float)speed;
 
 		//If the buoy is 250m away from the player, it will be destroyed

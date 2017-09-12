@@ -105,13 +105,13 @@ public class PM5_Communication : MonoBehaviour {
 	// Requests the distance travelled from the PM device - CSAFE_GETHORIZONTAL_CMD = 0xA1
 	private static UINT32_T Get_Distance() {
 		UINT16_T unit_address = 0, cmd_data_size = 1;
-		UINT32_T[] cmd_data = new UINT32_T[] { 0xA1, 0, 0 }, rsp_data = new UINT32_T[] { 0, 0, 0 };
+		UINT32_T[] cmd_data = new UINT32_T[] { 0xA1, 0, 0, 0 }, rsp_data = new UINT32_T[] { 0, 0, 0, 0 };
 		UINT16_T rsp_data_size_val = 64;
 		PTR_T rsp_data_size = (PTR_T)rsp_data_size_val;
 		ERRCODE_T error = 1;
 		error = tkcmdsetCSAFE_command(unit_address, cmd_data_size, cmd_data, ref rsp_data_size, rsp_data);
 		Handle_error(error, "tkcmdsetCSAFE_command: CSAFE_PM_GET_WORKDISTANCE");
-		return rsp_data[2];
+		return rsp_data[2] + (rsp_data[3] * 255);	
 	}
 
 	// Requests the current power from the PM device - CSAFE_GETPOWER_CMD = 0xB4

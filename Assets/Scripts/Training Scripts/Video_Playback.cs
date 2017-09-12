@@ -11,10 +11,10 @@ using UnityEngine.Video;
 using UnityEngine.UI;
 
 public class Video_Playback : MonoBehaviour {
-	private double boat_speed; //speed of the boat
-    private const double video_speed = 1; //speed the video was recorded at in m/s
-	private double normalise_multiplier; //video playback speed at 1m/s
-    public double video_playback; //the video playback speed to match the boat speed
+	public double playerSpeed; //speed retrieved from the ERG
+    private const double videoSpeed = 1.2; //speed the video was recorded at in m/s
+	private double normaliseMultiplier; //video playback speed at 1m/s
+    public double videoPlayback; //the video playback speed to match the boat speed
     public VideoPlayer video; //video object
 	public Text SpeedDisplay; //text object to display speed
     private Pace_Boat pb; //pace boat object
@@ -50,7 +50,7 @@ public class Video_Playback : MonoBehaviour {
 			Destroy(GameObject.Find("SceneController").GetComponent<Pace_Boat>());
 			Debug.Log("Free Session");
 		}
-		boat_speed = pm_com.current_Speed;
+		
 		playerstarted = false;
 		video.StepForward();
 		finished = false;
@@ -58,9 +58,9 @@ public class Video_Playback : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
 
-		normalise_multiplier = 1 / video_speed;
+		playerSpeed = pm_com.current_Speed;
+		normaliseMultiplier = 1 / videoSpeed;
 		
         lastPlayed = 0;
         green = new Color32(0x00, 0xFF, 0x4C, 0xFF);
@@ -75,9 +75,9 @@ public class Video_Playback : MonoBehaviour {
 		finished = GetComponent<Training_Summary>().finished;
 		if (!finished) {
 			deltatime += Time.deltaTime;
-			boat_speed = pm_com.current_Speed;
+			playerSpeed = pm_com.current_Speed;
 
-			if (!playerstarted && boat_speed > 0) {
+			if (!playerstarted && playerSpeed > 0) {
 				playerstarted = true;
 				if (!freeSession) {
 					GameObject.Find("pacing_boat").GetComponent<Animation>().Play();
@@ -86,7 +86,7 @@ public class Video_Playback : MonoBehaviour {
 			RefreshVideoSpeed();
 
 			if (!freeSession) {
-				if (video_playback > pb.pbspeed) {
+				if (videoPlayback > pb.pbspeed) {
 					SpeedDisplay.color = green;
 				} else {
 					SpeedDisplay.color = red;
@@ -96,24 +96,24 @@ public class Video_Playback : MonoBehaviour {
 					AudioController();
 				}
 			}
-			SpeedDisplay.text = Math.Round(video_playback, 2).ToString("F") + " m/s";
+			SpeedDisplay.text = Math.Round(videoPlayback, 2).ToString("F") + " m/s";
 		}
 	}
 
 	// Used to update the speed of the environment
     public void RefreshVideoSpeed() {
-        video_playback = boat_speed * normalise_multiplier;
-        video.playbackSpeed = (float) video_playback;
+        videoPlayback = playerSpeed * normaliseMultiplier;
+        video.playbackSpeed = (float) videoPlayback;
     }
 
 	public void AudioController()
     {
-       if (video_playback < minSpeed)
+       if (videoPlayback < minSpeed)
         {
             audioSource.PlayOneShot(speedUp);
             lastPlayed = 0;
         }
-       if (video_playback > maxSpeed)
+       if (videoPlayback > maxSpeed)
         {
 			audioSource.PlayOneShot(slowDown);
             lastPlayed = 0;

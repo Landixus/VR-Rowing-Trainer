@@ -25,7 +25,7 @@ public class MenuInput : MonoBehaviour {
 	private void Start() {
 		startTimer = false;
 		timeElapsed = false;
-		selectionTime = 1.0f;
+		selectionTime = 0.5f;
 		audioSource = GameObject.Find("Audio").GetComponent<AudioSource>();
 	}
 
@@ -47,7 +47,6 @@ public class MenuInput : MonoBehaviour {
 				} else {
 					startTimer = false;
 				}
-					
 			}
 		}
 	}

@@ -28,7 +28,7 @@ public class Foam : MonoBehaviour {
 		time++;
 
 		//This moves the foam at the speed of the video
-		speed = vp.video_playback;
+		speed = vp.playerSpeed;
 		transform.position += transform.up * Time.deltaTime * (float)speed;
 
 		//When the life value reaches 30, destroy it

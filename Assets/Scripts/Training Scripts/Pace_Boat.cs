@@ -39,7 +39,7 @@ public class Pace_Boat : MonoBehaviour {
 	}
 
 	public void Get_Speed_Difference() {
-		playerspeed = videoPlayback.video_playback;
+		playerspeed = videoPlayback.playerSpeed;
 		deltaspeed = (float)(playerspeed - pbspeed);
 	}
 
