@@ -20,7 +20,7 @@ public class SpawnObjects : MonoBehaviour {
 	//Determines how many rows of marker buoys will be visible in the virtual world
     public int buoyCount = 0;
 	//Determines the starting x position of the first marker buoy
-    private float xPos = 5f;
+    private float xPos = 6.5f;
 	//Determines the starting z position of the first row of marker buoys
     private float zPos = 0f;
 	//Checks if the buoys have already been created
@@ -52,12 +52,12 @@ public class SpawnObjects : MonoBehaviour {
 					//Otherwise, yellow buoys will spawn
 					if (((zPos % -100f) == 0f) || ((length + zPos) <= 100f)) {
 						Instantiate(redChild, new Vector3(xPos, spawn.transform.position.y - 0.88f, zPos - offset), spawn.transform.rotation, spawn.transform);
-						Instantiate(redChild, new Vector3(xPos - 10f, spawn.transform.position.y - 0.88f, zPos - offset), spawn.transform.rotation, spawn.transform);
-						Instantiate(redChild, new Vector3(xPos - 20f, spawn.transform.position.y - 0.88f, zPos - offset), spawn.transform.rotation, spawn.transform);
+						Instantiate(redChild, new Vector3(xPos - 13f, spawn.transform.position.y - 0.88f, zPos - offset), spawn.transform.rotation, spawn.transform);
+						Instantiate(redChild, new Vector3(xPos - 26f, spawn.transform.position.y - 0.88f, zPos - offset), spawn.transform.rotation, spawn.transform);
 					} else {
 						Instantiate(child, new Vector3(xPos, spawn.transform.position.y - 0.88f, zPos - offset), spawn.transform.rotation, spawn.transform);
-						Instantiate(child, new Vector3(xPos - 10f, spawn.transform.position.y - 0.88f, zPos - offset), spawn.transform.rotation, spawn.transform);
-						Instantiate(child, new Vector3(xPos - 20f, spawn.transform.position.y - 0.88f, zPos - offset), spawn.transform.rotation, spawn.transform);
+						Instantiate(child, new Vector3(xPos - 13f, spawn.transform.position.y - 0.88f, zPos - offset), spawn.transform.rotation, spawn.transform);
+						Instantiate(child, new Vector3(xPos - 26f, spawn.transform.position.y - 0.88f, zPos - offset), spawn.transform.rotation, spawn.transform);
 					}
 
 					//Increment the next row's z position by 10
@@ -69,8 +69,8 @@ public class SpawnObjects : MonoBehaviour {
 			curZPos = zPos;
 
 			Instantiate(spawner, new Vector3(xPos, spawn.transform.position.y - 0.88f, zPos - offset), spawn.transform.rotation, spawn.transform);
-			Instantiate(spawner, new Vector3(xPos - 10f, spawn.transform.position.y - 0.88f, zPos - offset), spawn.transform.rotation, spawn.transform);
-			Instantiate(spawner, new Vector3(xPos - 20f, spawn.transform.position.y - 0.88f, zPos - offset), spawn.transform.rotation, spawn.transform);
+			Instantiate(spawner, new Vector3(xPos - 13f, spawn.transform.position.y - 0.88f, zPos - offset), spawn.transform.rotation, spawn.transform);
+			Instantiate(spawner, new Vector3(xPos - 26f, spawn.transform.position.y - 0.88f, zPos - offset), spawn.transform.rotation, spawn.transform);
 
 			//Reset the z position for next time the code is called
 			zPos = 0;

@@ -59,7 +59,7 @@ public class Video_Playback : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		playerSpeed = pm_com.current_Speed;
+		//playerSpeed = pm_com.current_Speed;
 		normaliseMultiplier = 1 / videoSpeed;
 		
         lastPlayed = 0;
