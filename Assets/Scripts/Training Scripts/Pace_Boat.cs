@@ -12,7 +12,8 @@ public class Pace_Boat : MonoBehaviour {
 	public double playerspeed; //speed of the player boat in m/s
 	public float deltaspeed; //difference in speed
 	public Transform pb; //position of the pace boat
-	private Video_Playback videoPlayback;
+	private Video_Playback videoPlayback; //video playback component from video
+	private Animation anim; //animation speed of pacing boat
 	//public GetTargetSpeed ts; //
 	//public GameObject slider;
 
@@ -27,6 +28,11 @@ public class Pace_Boat : MonoBehaviour {
 	// Use this for initialization
 	void Start() {
 		videoPlayback = GetComponent<Video_Playback>();
+		anim = pb.GetComponent<Animation>();
+		//Sets speed of animation
+		foreach (AnimationState state in anim) {
+			state.speed = (float)(1 + (pbspeed * 0.125));
+		}
 	}
 
 	// Update is called once per frame
