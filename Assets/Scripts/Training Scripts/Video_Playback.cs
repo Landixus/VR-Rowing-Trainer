@@ -50,7 +50,7 @@ public class Video_Playback : MonoBehaviour {
 			Destroy(GameObject.Find("SceneController").GetComponent<Pace_Boat>());
 			Debug.Log("Free Session");
 		}
-		
+		playerSpeed = 0;
 		playerstarted = false;
 		video.StepForward();
 		finished = false;
@@ -92,7 +92,7 @@ public class Video_Playback : MonoBehaviour {
 					SpeedDisplay.color = red;
 				}
 				lastPlayed += Time.deltaTime;
-				if (lastPlayed > 5 && playerstarted) {
+				if (lastPlayed > 5 && playerstarted && !finished) {
 					AudioController();
 				}
 			}
