@@ -14,7 +14,7 @@ public class LoadScene : MonoBehaviour {
         SceneManager.LoadScene(SceneIndex);
     }
 
-	// Used to load the current scene when the user wants to restarts a session
+	// Used to load the current scene when the user wants to restart a session
 	public void LoadCurrentScene() 
 	{
 		string currentScene = SceneManager.GetActiveScene().name;

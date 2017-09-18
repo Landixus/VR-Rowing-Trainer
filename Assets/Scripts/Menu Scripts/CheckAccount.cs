@@ -25,7 +25,7 @@ public class CheckAccount : MonoBehaviour {
 	// Checks if user exists or creates new user and logs in
 	public void Login() {
 		// This is the path of the accounts folder inside the Unity project
-		// This will change when the Unity project is on another computer
+		// **** WARNING **** This will change when the Unity project is on another computer
 		string path = "D:\\Projects\\Student Teams\\VR-Rowing-Trainer\\Assets\\Accounts\\";
 		// Try catch any errors when finding or creating a directory and handle those errors appropriately
 		try {

@@ -14,45 +14,43 @@ public class Pace_Boat : MonoBehaviour {
 	public Transform pb; //position of the pace boat
 	private Video_Playback videoPlayback; //video playback component from video
 	private Animation anim; //animation speed of pacing boat
-	//public GetTargetSpeed ts; //
-	//public GameObject slider;
+    private double restrictionLength; // Used to give the pacing boat a restriction of how far it can lead or trail the user
 
-	private void Awake() {
-		try {
-			pbspeed = GameObject.Find("SceneDataManager").GetComponent<SceneData>().targetSpeed;
-		} catch { };
-		//Debug.Log(pbspeed);
-	}
-
-
-	// Use this for initialization
-	void Start() {
-		videoPlayback = GetComponent<Video_Playback>();
+    // Use this for initialization
+    void Start() {
+        pbspeed = GameObject.Find("SceneDataManager").GetComponent<SceneData>().targetSpeed;
+        videoPlayback = GetComponent<Video_Playback>();
 		anim = pb.GetComponent<Animation>();
-		//Sets speed of animation
-		foreach (AnimationState state in anim) {
+        restrictionLength = 20;
+        //Sets speed of animation
+        foreach (AnimationState state in anim) {
 			state.speed = (float)(1 + (pbspeed * 0.125));
 		}
 	}
 
 	// Update is called once per frame
 	void Update() {
-		Get_Speed_Difference();
-		if (videoPlayback.playerstarted) {
-			Move_Pace_Boat();
+        // Only get the speed difference and move the boat when the user a=has start to row
+		if (videoPlayback.playerStarted) {
+            Get_Speed_Difference();
+            Move_Pace_Boat();
 		}
 
 	}
 
+    // Gets the difference in speed between the user and the pacing boat
 	public void Get_Speed_Difference() {
 		playerspeed = videoPlayback.playerSpeed;
 		deltaspeed = (float)(playerspeed - pbspeed);
 	}
 
+    // Used to move the pacing boat in relation to the speed difference
 	public void Move_Pace_Boat() {
-		if (pb.position.z < 20 && pb.position.z > -20) {
+        // Used to restrict the pacing boat to the set length from the user's boat
+		if (pb.position.z < restrictionLength && pb.position.z > -restrictionLength) {
 			pb.position += pb.forward * deltaspeed * Time.deltaTime;
 		} else {
+            // If the pacing boat exceeds the restriction length it moves in the opposite direction bringing it back into the allowed zone
 			pb.position -= pb.forward * deltaspeed * Time.deltaTime;
 		}
 	}
