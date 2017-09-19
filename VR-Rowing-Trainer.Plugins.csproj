@@ -186,6 +186,8 @@
     <Compile Include="Assets\Plugins\VRStandardAssets\VRInteractiveItem.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Accounts\Clay\201709151556.txt" />
+    <None Include="Assets\Accounts\Clay\201709151608.txt" />
     <None Include="Assets\Accounts\Lin\201709111517.txt" />
     <None Include="Assets\Accounts\Lin\201709111518.txt" />
     <None Include="Assets\Accounts\Lin\201709121631.txt" />

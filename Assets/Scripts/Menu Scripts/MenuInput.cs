@@ -25,7 +25,7 @@ public class MenuInput : MonoBehaviour {
 	private void Start() {
 		startTimer = false;
 		timeElapsed = false;
-		selectionTime = 0.5f;
+		selectionTime = 1f;
 		audioSource = GameObject.Find("Audio").GetComponent<AudioSource>();
 	}
 
@@ -42,6 +42,7 @@ public class MenuInput : MonoBehaviour {
 			if (timeElapsed) {
 				audioSource.PlayOneShot(menuClick);
 				selectedButton.onClick.Invoke();
+                // If the selected button is a slider button start the timer again allowing the user to press multiple times without having to look away
 				if(selectedButton.tag == "SliderButton") {
 					startTime = Time.time;
 				} else {
@@ -74,7 +75,7 @@ public class MenuInput : MonoBehaviour {
 			startTimer = false;
 		}
 	}
-
+    // Sets the button selected to false when disabled
 	public void OnDisable() {
 		buttonSelected = false;
 	}

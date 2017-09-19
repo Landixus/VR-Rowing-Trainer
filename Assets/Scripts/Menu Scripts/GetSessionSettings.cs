@@ -12,9 +12,9 @@ public class GetSessionSettings : MonoBehaviour {
 	private Slider raceLength; // Used to get the user input for the length of the race
 	private Slider minSpeed; // Used to get the value set by the user for the minimum speed indicator
 	private Slider maxSpeed; // Used to get the value set by the user for the maximum speed indicator
-	private SceneData sceneData; //Used to store the data for transfer between scenes
-	private Text lengthValue;
-	private Text minValue; // Used to display to the chosen minimum speed value to the user
+	private SceneData sceneData; // Used to store the data for transfer between scenes
+	private Text lengthValue; // Used to display to the chosen length value to the user
+    private Text minValue; // Used to display to the chosen minimum speed value to the user
 	private Text maxValue; // Used to display to the chosen maximum speed value to the user
 	private Slider targetSlider; // Used to get the value set by the user for the target speed
 	private Text valueText; // Used to display to the chosen target speed value to the user
@@ -42,6 +42,7 @@ public class GetSessionSettings : MonoBehaviour {
 	public void RaceLengthSlider() {
 		raceLength = GameObject.Find("RaceLengthSlider").GetComponent<Slider>();
 		lengthValue = GameObject.Find("RaceLengthValue").GetComponent<Text>();
+        // The slider value allow the user to chose a race length between 100m and 2000m in 100m increments
 		lengthValue.text = "Race Length: " + (raceLength.value * 100).ToString() + " m";
 	}
 
@@ -91,11 +92,13 @@ public class GetSessionSettings : MonoBehaviour {
 		sceneData.targetSpeed = targetSlider.value;
 	}
 
+    // Used to set the session to a free session
 	public void SetFreeSession() {
 		sceneData = GameObject.Find("SceneDataManager").GetComponent<SceneData>();
 		sceneData.freeSession = true;
 	}
 
+    // Used to set the session to a custom session
 	public void SetCustomSession() {
 		sceneData = GameObject.Find("SceneDataManager").GetComponent<SceneData>();
 		sceneData.freeSession = false;
