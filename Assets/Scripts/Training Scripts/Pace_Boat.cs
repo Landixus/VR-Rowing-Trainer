@@ -30,7 +30,7 @@ public class Pace_Boat : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
-        // Only get the speed difference and move the boat when the user a=has start to row
+        // Only get the speed difference and moves the boat when the user has started to row
 		if (videoPlayback.playerStarted) {
             Get_Speed_Difference();
             Move_Pace_Boat();
