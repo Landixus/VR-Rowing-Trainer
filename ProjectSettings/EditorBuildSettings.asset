@@ -12,11 +12,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Custom Session.unity
     guid: 6799c00c9775cc842b7a2f1ff52e3efb
   - enabled: 0
-    path: Assets/Scenes/Free Session.unity
+    path: 
     guid: 731939ca7e396534a868cfffeba2ae63
   - enabled: 0
-    path: Assets/Scenes/Menu.unity
+    path: 
     guid: f50c8dcd9639467419e66e478732d6d2
   - enabled: 0
-    path: Assets/Scenes/Ben's Scene.unity
+    path: 
     guid: 5c21460bead7ac74f98c487cc9b7b1a1

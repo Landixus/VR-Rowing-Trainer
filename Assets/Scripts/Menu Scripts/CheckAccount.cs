@@ -25,8 +25,7 @@ public class CheckAccount : MonoBehaviour {
 	// Checks if user exists or creates new user and logs in
 	public void Login() {
 		// This is the path of the accounts folder inside the Unity project
-		// **** WARNING **** This will change when the Unity project is on another computer
-		string path = "D:\\Projects\\Student Teams\\VR-Rowing-Trainer\\Assets\\Accounts\\";
+		string path = Application.dataPath + "\\Accounts\\";
 		// Try catch any errors when finding or creating a directory and handle those errors appropriately
 		try {
 			// Determine whether the directory exists, then set the username and user path
@@ -42,7 +41,7 @@ public class CheckAccount : MonoBehaviour {
 			}
 		} catch (Exception e) {
 			// Logs to console if there were any errors
-			Debug.LogFormat("The process failed: {0}", e.ToString());
+			Debug.LogFormat("Failed at saving account information: {0}", e.ToString());
 		} finally { }
 
 	}

@@ -28,6 +28,7 @@ public class PM5_Communication : MonoBehaviour {
 	private static int idle_Counter;
 
 	// Import of all dll functions required for communication with PM device
+#if UNITY_EDITOR
 	[DllImport("PM3DDICP.dll")]
 	// Initializes the Command Set Toolkit functions.
 	static extern ERRCODE_T tkcmdsetDDI_init();
@@ -40,6 +41,20 @@ public class PM5_Communication : MonoBehaviour {
 	[DllImport("PM3CsafeCP.dll")]
 	// Sends a CSAFE command to a PM device and returns the response data.
 	static extern ERRCODE_T tkcmdsetCSAFE_command(UINT16_T unit_address, UINT16_T cmd_data_size, UINT32_T[] cmd_data, ref PTR_T rsp_data_size, UINT32_T[] rsp_data);
+# else
+	[DllImport("PM3DDICP")]
+	// Initializes the Command Set Toolkit functions.
+	static extern ERRCODE_T tkcmdsetDDI_init();
+	[DllImport("PM3CsafeCP")]
+	//Initializes the DLL error code interface and configures the CSAFE protocol.
+	static extern ERRCODE_T tkcmdsetCSAFE_init_protocol(UINT16_T timeout);
+	[DllImport("PM3DDICP")]
+	// Discover all PM3 devices connected to the PC via various media interfaces.
+	static extern ERRCODE_T tkcmdsetDDI_discover_pm3s(byte[] productname, UINT16_T address, ref PTR_T num_units);
+	[DllImport("PM3CsafeCP")]
+	// Sends a CSAFE command to a PM device and returns the response data.
+	static extern ERRCODE_T tkcmdsetCSAFE_command(UINT16_T unit_address, UINT16_T cmd_data_size, UINT32_T[] cmd_data, ref PTR_T rsp_data_size, UINT32_T[] rsp_data);
+#endif
 
 	// Use this for initialization
 	void Start() {
