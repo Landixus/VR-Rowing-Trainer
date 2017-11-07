@@ -60,3 +60,6 @@ Assets/TrainingLogs.meta
 .vs/
 *.csproj
 Assets/TrainingLogs/
+bin/
+*.sln
+*.userprefs
