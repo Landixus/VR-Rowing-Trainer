@@ -1,7 +1,0 @@
-Completed on: 9/9/2017 12:04:13 AM
-Distance: 201
-Time: 1:26.696
-Average Splits: 0:21.674
-Average Strokes: 21.6117649078369
-Average Speed: 2.28705930709839
-Average Power: 62.8941192626953

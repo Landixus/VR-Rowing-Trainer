@@ -1,7 +1,0 @@
-Completed on: 9/12/2017 4:23:55 PM
-Distance: 110
-Time: 0:0.32
-Average Splits: 0:0.8
-Average Strokes: NaN
-Average Speed: NaN
-Average Power: NaN
