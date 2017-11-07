@@ -56,3 +56,7 @@ Temporary Items
 .apdisk
 .vs/VR-Rowing-Trainer/v15/Browse.VC.opendb
 .vs/VR-Rowing-Trainer/v15/ipch/AutoPCH/_SFI_B7042E55-767E-44AA-BDBB-0A6685E9613C_-e653036f/PM3MONITOR-bfd17699/PM3MONITOR.ipch
+Assets/TrainingLogs.meta
+.vs/
+*.csproj
+Assets/TrainingLogs/
