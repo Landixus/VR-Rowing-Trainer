@@ -16,7 +16,7 @@ namespace VRStandardAssets.Utils {
 		[SerializeField] private VRInput m_VrInput;                     // Used to call input based events on the current VRInteractiveItem.
 		[SerializeField] private bool m_ShowDebugRay;                   // Optionally show the debug ray.
 		[SerializeField] private float m_DebugRayLength = 5f;           // Debug ray length.
-		[SerializeField] private float m_DebugRayDuration = 1f;         // How long the Debug ray will remain visible.
+		[SerializeField] private float m_DebugRayDuration = 0f;         // How long the Debug ray will remain visible.
 		[SerializeField] private float m_RayLength = 500f;              // How far into the scene the ray is cast.
 
 
