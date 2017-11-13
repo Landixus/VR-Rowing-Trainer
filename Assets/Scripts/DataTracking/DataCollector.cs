@@ -18,16 +18,20 @@ public class DataCollector : MonoBehaviour {
 	public int powerCollectionRate = 100;
 	public int dataCollectionRate = 4;
 
+	[HideInInspector]
 	public List<TrackingData> trackingData = new List<TrackingData>();
+	[HideInInspector]
 	public List<PowerData> powerData = new List<PowerData>();
 
+	[Header("Reference Objects")]
 	public Transform trackedObject;
 	public PM5_Communication pm_com;
 
+	[Header("Misc")]
 	public bool hasStarted = false;
 
-	public DateTime startTime;
-	public float currentTime = 0;
+	private DateTime startTime;
+	private float currentTime = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -41,6 +45,8 @@ public class DataCollector : MonoBehaviour {
 		startTime = DateTime.Now;
 
 		// Invoke ALL the things!
+
+		PM5_Communication.initTime();
 
 		float powerRate = 1f / powerCollectionRate;
 		float dataRate = 1f / dataCollectionRate;
@@ -59,10 +65,22 @@ public class DataCollector : MonoBehaviour {
 	// Collects just the power data
 	public void collectPowerData() {
 
-		PowerData data = new PowerData();
-		data.power = pm_com.current_Power;
+		double time;
+		double distance;
+		double cadence;
+		double speed;
+		double power;
 
-		data.timestamp = (DateTime.Now - startTime).TotalMilliseconds;
+		PM5_Communication.getRawValues(out time, out distance, out cadence, out speed, out power);
+
+		PowerData data = new PowerData();
+
+		data.power = power;
+		data.timestamp = time;
+
+	//	data.power = pm_com.current_Power;
+
+	//	data.timestamp = (DateTime.Now - startTime).TotalMilliseconds;
 
 
 		powerData.Add(data);

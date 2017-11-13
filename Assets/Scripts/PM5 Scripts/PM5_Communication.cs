@@ -20,7 +20,13 @@ public class PM5_Communication : MonoBehaviour {
 
 	public double current_Speed, current_Power, current_MinPer500m;
 	public UINT32_T current_Time, current_Distance, current_Cadence;
-	
+
+	public static DateTime startTime;
+
+	public static double rawSpeed, rawPower;
+	public static UINT32_T rawTime, rawDistance, rawCadence;
+	public static UINT32_T prevTime, prevDist;
+
 	// Variables for speed calculation and idle sensing
 	private static UINT32_T last_Distance = 0, last_Time = 0;
 	public static LinkedList <double> speed_List = new LinkedList<double>();
@@ -67,6 +73,37 @@ public class PM5_Communication : MonoBehaviour {
 	// Update is called once per frame
 	void Update() {
 		Get_Speed();
+	}
+
+	public static void initTime() {
+		startTime = DateTime.Now;
+	}
+
+	// static function to call to get the raw values
+	public static void getRawValues(out double time, out double distance, out double cadence, out double speed, out double power) {
+
+		prevTime = rawTime;
+		prevDist = rawDistance;
+
+		//rawTime = Get_Time();
+		rawTime = (UINT32_T) ((DateTime.Now - startTime).TotalMilliseconds);
+		//rawDistance = Get_Distance();
+		//rawCadence = Get_Cadence();
+		//rawPower = Get_Power();
+
+		//if ((rawTime - prevTime) > 0) {
+		//	rawSpeed = (double)(rawDistance - prevDist) / (rawTime - prevTime);
+
+		//	Debug.Log("Speed (m/s): " + rawSpeed.ToString("N3"));
+		//}
+
+		// Output the values
+		time = rawTime;
+		distance = rawDistance;
+		cadence = rawCadence;
+		speed = rawSpeed;
+		power = rawPower;
+
 	}
 
 	// Initialize communication protocols with the Concept2 device
