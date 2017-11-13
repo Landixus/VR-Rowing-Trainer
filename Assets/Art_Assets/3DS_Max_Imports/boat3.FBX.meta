@@ -152,6 +152,21 @@ ModelImporter:
     4300024: pPlane16
     4300026: Cylinder003
     4300028: Cylinder004
+    6400000: Cylinder003
+    6400002: Cylinder004
+    6400004: pCube3
+    6400006: pCube4
+    6400008: polySurface1
+    6400010: polySurface4
+    6400012: pPipe3
+    6400014: pPipe5
+    6400016: pPipe7
+    6400018: pPipe8
+    6400020: pPlane13
+    6400022: pPlane14
+    6400024: pPlane15
+    6400026: pPlane16
+    6400028: pPlane6
     7400000: Take 001
     9500000: //RootNode
   materials:
@@ -182,7 +197,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -196,8 +211,8 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 60
-    normalImportMode: 0
+    normalSmoothAngle: 30
+    normalImportMode: 1
     tangentImportMode: 3
   importAnimation: 1
   copyAvatar: 0
