@@ -8,6 +8,7 @@
 
 		_FadeStart("Fade Starting", Range(0.001, 10)) = 3
 		_FadeDist("Fade Distance", Range(0.001, 100)) = 10
+		_ColorMap("Color Map", 2D) = "white" {}
 		
 	}
 
@@ -42,6 +43,7 @@
 		struct appdata {
 			float4 vertex : POSITION;
 			float3 normal : NORMAL;
+			float2 texcoord : TEXCOORD0;
 		};
 
 		struct v2f {
@@ -51,6 +53,8 @@
 			float3 viewDir : TEXCOORD2;
 
 			float4 worldPos : TEXCOORD3;
+			float2 texcoord : TEXCOORD4;
+
 		};
 
 		v2f vert(appdata v) {
@@ -68,6 +72,7 @@
 			o.viewDir.xzy = WorldSpaceViewDir(v.vertex);
 
 			o.worldPos = wpos;
+			o.texcoord = v.texcoord;
 
 			return o;
 		}
@@ -78,6 +83,7 @@
 
 		float _FadeDist;
 		float _FadeStart;
+		sampler2D _ColorMap;
 
 		half4 frag(v2f i) : SV_Target {
 			i.viewDir = normalize(i.viewDir);
@@ -96,6 +102,10 @@
 			half4 water = tex2D(_ReflectiveColor, float2(fresnelFac,fresnelFac));
 			color.rgb = lerp(water.rgb, _HorizonColor.rgb, water.a);
 			color.a = _HorizonColor.a;
+
+			// Apply color map over the top
+			half4 colorMap = tex2D(_ColorMap, i.texcoord);
+			color += colorMap;
 
 			// Fade alpha based on distance from WorldOrigin
 			float len = length(i.worldPos.xyz);
