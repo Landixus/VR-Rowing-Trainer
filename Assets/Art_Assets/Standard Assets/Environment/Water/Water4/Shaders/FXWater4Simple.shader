@@ -15,7 +15,7 @@ Properties {
 
 	_BumpTiling ("Bump Tiling", Vector) = (1.0 ,1.0, -2.0, 3.0)
 	_BumpDirection ("Bump Direction & Speed", Vector) = (1.0 ,1.0, -1.0, 1.0)
-	
+
 	_FresnelScale ("FresnelScale", Range (0.15, 4.0)) = 0.75
 
 	_BaseColor ("Base color", COLOR)  = ( .54, .95, .99, 0.5)

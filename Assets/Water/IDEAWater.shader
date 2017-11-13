@@ -5,6 +5,10 @@
 		WaveSpeed("Wave speed (map1 x,y; map2 x,y)", Vector) = (19,9,-16,-7)
 		[NoScaleOffset] _ReflectiveColor("Reflective color (RGB) fresnel (A) ", 2D) = "" {}
 		_HorizonColor("Simple water horizon color", COLOR) = (.172, .463, .435, 1)
+
+		_FadeStart("Fade Starting", Range(0.001, 10)) = 3
+		_FadeDist("Fade Distance", Range(0.001, 100)) = 10
+		
 	}
 
 
@@ -14,13 +18,19 @@
 
 	Subshader{
 		Tags {
+			"Queue" = "Transparent"
 			"RenderType" = "Transparent"
 			"ForceNoShadow" = "True"
 			"PreviewType" = "Plane"
 		}
 
+		LOD 100
+		ZWrite Off Blend SrcAlpha OneMinusSrcAlpha
+
 	Pass {
 		CGPROGRAM
+		// Upgrade NOTE: excluded shader from DX11; has structs without semantics (struct v2f members worldPos)
+		//#pragma exclude_renderers d3d11
 		#pragma vertex vert
 		#pragma fragment frag
 
@@ -39,6 +49,8 @@
 			float2 bumpuv0 : TEXCOORD0;
 			float2 bumpuv1 : TEXCOORD1;
 			float3 viewDir : TEXCOORD2;
+
+			float4 worldPos : TEXCOORD3;
 		};
 
 		v2f vert(appdata v) {
@@ -55,12 +67,17 @@
 			// object space view direction (will normalize per pixel)
 			o.viewDir.xzy = WorldSpaceViewDir(v.vertex);
 
+			o.worldPos = wpos;
+
 			return o;
 		}
 
 		sampler2D _ReflectiveColor;
 		uniform float4 _HorizonColor;
 		sampler2D _BumpMap;
+
+		float _FadeDist;
+		float _FadeStart;
 
 		half4 frag(v2f i) : SV_Target {
 			i.viewDir = normalize(i.viewDir);
@@ -81,7 +98,16 @@
 			color.a = _HorizonColor.a;
 
 			// Fade alpha based on distance from WorldOrigin
-			color.a = 0;
+			float len = length(i.worldPos.xyz);
+			
+			if (len > _FadeStart) {
+				float dist = (len - _FadeStart) / _FadeDist;
+				color.a = lerp(1, 0, dist);
+				//color.r = 1;			// Debug
+			}
+
+			else
+				color.a = _HorizonColor.a;
 
 			return color;
 

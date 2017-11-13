@@ -38,10 +38,13 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _FadeDist: 6
+    - _FadeStart: 5.8
+    - _FadeStop: 3.9
     - _ReflDistort: 0.44
     - _RefrDistort: 0.4
-    - _WaveScale: 0.063
+    - _WaveScale: 0.048
     m_Colors:
     - WaveSpeed: {r: 19, g: 9, b: -16, a: -7}
-    - _HorizonColor: {r: 0.17199996, g: 0.46299994, b: 0.43499997, a: 1}
+    - _HorizonColor: {r: 0, g: 0.12423939, b: 0.36764705, a: 1}
     - _RefrColor: {r: 0.33999997, g: 0.85, b: 0.92, a: 1}
