@@ -9,6 +9,7 @@
 		_FadeStart("Fade Starting", Range(0.001, 10)) = 3
 		_FadeDist("Fade Distance", Range(0.001, 100)) = 10
 		_ColorMap("Color Map", 2D) = "white" {}
+		_ColorCorrection("Color Correction Value", Range(0, 1)) = 1
 		
 	}
 
@@ -84,6 +85,7 @@
 		float _FadeDist;
 		float _FadeStart;
 		sampler2D _ColorMap;
+		float _ColorCorrection;
 
 		half4 frag(v2f i) : SV_Target {
 			i.viewDir = normalize(i.viewDir);
@@ -104,7 +106,7 @@
 			color.a = _HorizonColor.a;
 
 			// Apply color map over the top
-			half4 colorMap = tex2D(_ColorMap, i.texcoord);
+			half4 colorMap = (tex2D(_ColorMap, i.texcoord) * _ColorCorrection);
 			color += colorMap;
 
 			// Fade alpha based on distance from WorldOrigin
