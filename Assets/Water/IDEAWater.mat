@@ -22,7 +22,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ColorMap:
-        m_Texture: {fileID: 2800000, guid: 35321830c93786d40859919cb5d2fbb9, type: 3}
+        m_Texture: {fileID: 2800000, guid: 098c9ffc9c2dc1d429a3c3742e496bf3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Fresnel:
@@ -42,8 +42,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _FadeDist: 40
-    - _FadeStart: 8.6
+    - _ColorCorrection: 0.29
+    - _FadeDist: 199
+    - _FadeStart: 5.95
     - _FadeStop: 3.9
     - _ReflDistort: 0.44
     - _RefrDistort: 0.4

@@ -7,7 +7,7 @@
 		_HorizonColor("Simple water horizon color", COLOR) = (.172, .463, .435, 1)
 
 		_FadeStart("Fade Starting", Range(0.001, 10)) = 3
-		_FadeDist("Fade Distance", Range(0.001, 100)) = 10
+		_FadeDist("Fade Distance", Range(0.001, 1000)) = 10
 		_ColorMap("Color Map", 2D) = "white" {}
 		_ColorCorrection("Color Correction Value", Range(0, 1)) = 1
 		
@@ -114,7 +114,11 @@
 			
 			if (len > _FadeStart) {
 				float dist = (len - _FadeStart) / _FadeDist;
-				color.a = lerp(1, 0, dist);
+				//color.a = lerp(1, 0, dist);
+				//color.a =  1 - sin(dist * 3.14 * .5);
+				float t = color.a;
+				t = t*t * (3 - 2 * t);
+				color.a = 1 - (t * dist);
 				//color.r = 1;			// Debug
 			}
 
