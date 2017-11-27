@@ -57,7 +57,7 @@ public class DataCollector : MonoBehaviour {
 		//collectPowerData();
 		//collectAllData();
 
-		Invoke("saveData", 10);
+		//Invoke("saveData", 10);
 		//saveData();
 
 	}

@@ -42,6 +42,9 @@ public class Training_Summary : MonoBehaviour {
 	public Text AverageSpeedText;
 	public Text AveragePowerText;
 
+	[Header("Do this properly")]
+	public DataCollector dataCollector;
+
 	// Used for initialisation
 	void Start () {
 		pm_com = GetComponent<PM5_Communication>();
@@ -100,6 +103,10 @@ public class Training_Summary : MonoBehaviour {
 			split[count-1] = splitTime;
             // Used to display the training summary
             DisplaySummary();
+
+			// TODO: Call this properly
+			dataCollector.saveData();
+
 		}
 	}
 
