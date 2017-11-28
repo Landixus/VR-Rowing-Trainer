@@ -78,9 +78,9 @@ public class DataCollector : MonoBehaviour {
 		data.power = power;
 		data.timestamp = time;
 
-	//	data.power = pm_com.current_Power;
+		data.power = pm_com.current_Power;
 
-	//	data.timestamp = (DateTime.Now - startTime).TotalMilliseconds;
+		data.timestamp = (DateTime.Now - startTime).TotalMilliseconds;
 
 
 		powerData.Add(data);

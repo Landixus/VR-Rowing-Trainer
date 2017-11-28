@@ -113,7 +113,7 @@ public class PM5_Communication : MonoBehaviour {
 		Handle_error(error, "tkcmdsetDDI_init");
 		error = 1;
 		//error = tkcmdsetCSAFE_init_protocol(1000);          // Timeout set to 1000ms
-		error = tkcmdsetCSAFE_init_protocol(10);			// Timeout set to 10ms
+		error = tkcmdsetCSAFE_init_protocol(1000);			// Timeout set to 10ms
 		Handle_error(error, "tkcmdsetCSAFE_init_protocol");
 		Device_counter();
 		return;
@@ -138,6 +138,14 @@ public class PM5_Communication : MonoBehaviour {
 		ERRCODE_T error = 1;
 		error = tkcmdsetDDI_discover_pm3s(product_name_ptr, address, ref num_units_ptr);
 		Handle_error(error, "tkcmdsetDDI_discover_pm3s");
+
+		if(num_units == 0) {
+			product_name_str = "Concept2 Performance Monitor 3 (PM3)";
+			product_name_ptr = System.Text.Encoding.UTF8.GetBytes(product_name_str);
+			error = tkcmdsetDDI_discover_pm3s(product_name_ptr, address, ref num_units_ptr);
+			Handle_error(error, "tkcmdsetDDI_discover_pm3s");
+		}
+
 		Debug.Log("PM5's connected: " + num_units_ptr.ToString());
 		return;
 	}
