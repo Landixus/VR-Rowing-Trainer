@@ -112,7 +112,8 @@ public class PM5_Communication : MonoBehaviour {
 		error = tkcmdsetDDI_init();
 		Handle_error(error, "tkcmdsetDDI_init");
 		error = 1;
-		error = tkcmdsetCSAFE_init_protocol(1000);			// Timeout set to 1000ms
+		//error = tkcmdsetCSAFE_init_protocol(1000);          // Timeout set to 1000ms
+		error = tkcmdsetCSAFE_init_protocol(10);			// Timeout set to 10ms
 		Handle_error(error, "tkcmdsetCSAFE_init_protocol");
 		Device_counter();
 		return;
