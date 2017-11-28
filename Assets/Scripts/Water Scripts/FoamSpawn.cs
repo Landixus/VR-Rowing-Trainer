@@ -24,6 +24,9 @@ public class FoamSpawn : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+		return;
+
 		//Always match the position of the foam spawner with that of the transform position attached to the oar
 		transform.position = foamTrans.position;
 		
